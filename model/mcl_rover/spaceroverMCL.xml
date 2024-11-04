@@ -1,0 +1,285 @@
+<mujoco model="spaceroverMCL">
+  <compiler angle="radian" meshdir="assets/meshes/" />
+
+  <option timestep="0.0001" integrator="RK4" gravity = "0 0 -9.81" cone="elliptic" impratio="100">
+    <flag sensornoise="enable" energy="enable" contact="enable" />
+  </option>
+
+
+  <default>
+    <default class="spaceroverMCL">
+      <geom friction="0.6" margin="0.001" condim="1"/>
+      <joint axis="0 0 -1" armature="0.1" damping="2" stiffness="0" frictionloss="1"/>
+
+      <default class="sus_joint">
+        <joint range="-1.0472 1.0472"/>
+      </default>
+
+      <default class="steer_joint">
+        <joint range="-1.0472 1.0472"/>
+      </default>
+
+      <default class="visual">
+        <geom type="mesh" contype="0" conaffinity="0" group="2"/>
+      </default>
+
+      <default class= "collision">
+        <geom group="3" priority="1" solimp="0.015 1 0.031" condim="6" friction="0.8 0.02 0.01"/>
+      </default>
+
+    </default>
+  </default>
+
+
+
+
+  <asset>
+    <mesh name="trunk" file="base_link.STL"/>
+    <mesh name="FL_bot_sus_bar" file="FL_bot_sus_bar.STL"/>
+    <mesh name="FL_sus_cover" file="FL_sus_cover.STL"/>
+    <mesh name="FL_steer_link" file="FL_steer_link.STL"/>
+    <mesh name="FL_wheel" file="FL_wheel.STL"/>
+    <mesh name="FR_bot_sus_bar" file="FR_bot_sus_bar.STL"/>
+    <mesh name="FR_sus_cover" file="FR_sus_cover.STL"/>
+    <mesh name="FR_steer_link" file="FR_steer_link.STL"/>
+    <mesh name="FR_wheel" file="FR_wheel.STL"/>
+    <mesh name="RL_bot_sus_bar" file="RL_bot_sus_bar.STL"/>
+    <mesh name="RL_sus_cover" file="RL_sus_cover.STL"/>
+    <mesh name="RL_steer_link" file="RL_steer_link.STL"/>
+    <mesh name="RL_wheel" file="RL_wheel.STL"/>
+    <mesh name="RR_bot_sus_bar" file="RR_bot_sus_bar.STL"/>
+    <mesh name="RR_sus_cover" file="RR_sus_cover.STL"/>
+    <mesh name="RR_steer_link" file="RR_steer_link.STL"/>
+    <mesh name="RR_wheel" file="RR_wheel.STL"/>
+
+    <texture name="Dgist" type="2d" file="Dgist_Logo.png"/>
+    <texture name="Mcl" type="2d" file="Mcl_Logo.png"/>
+    <texture name="Car_num" type="2d" file="Car_num.png"/>
+
+    <material name="Dgist_Mark" texture="Dgist" reflectance="0.2" shininess="0.1"/>
+    <material name="Mcl_Mark" texture="Mcl" reflectance="0.2" shininess="0.1"/>
+    <material name="Car_num_Mark" texture="Car_num" reflectance="0.2" shininess="0.1"/>
+
+
+  </asset>
+
+
+  <worldbody>
+    <light diffuse=".5 .5 .5" pos="0 0 3" dir="0 0 -1"/>
+    <body name="trunk" pos="0 0.2 0.5" euler="0 0 0">
+      <inertial pos="0.04735 -1.09 -0.0080492" euler="0 0 0" mass="1.3351" diaginertia="0.05797 0.17656 0.216789"/>
+      <freejoint/>
+      <site type="box" name="imu" pos="0.04735 -1.09 -0.0080492" size="0.1 0.05 0.05" rgba="0 0 1 1" />
+
+
+
+      <geom class="visual" mesh="trunk" rgba="0.7373 0.4196 0 1" />
+      <geom class="visual" type="box" pos="0.24735 -0.838 0.04" size="0.18 0.12 0.00000001" euler="1.571 3.1416 0" material="Dgist_Mark" />
+      <geom class="visual" type="box" pos="-0.24735 -0.838 0.04" size="0.2 0.12 0.00000001" euler="1.571 3.1416 0" material="Mcl_Mark" />
+      <geom class="visual" type="box" pos="-0.48 -1.09 -0.05" size="0.12 0.03 0.00000001" euler="1.571 4.7124 0" material="Car_num_Mark" />
+
+
+      <geom type="box" pos="0.04735 -1.09 0.018" size="0.525 0.25 0.1" class="collision"/>
+
+      <body name="FL_bot_sus_bar" pos="0.587 -0.88 -0.0422" quat="0.499998 -0.5 0.500002 -0.5">
+        <inertial pos="-0.0800444 -0.027786 0.005" quat="-0.0123149 0.707 0.0123149 0.707" mass="0.187288" diaginertia="0.000459009 0.000435537 3.04959e-05"/>
+        <joint name="FL_sus_act" pos="0 0 0" axis="0 0 1"/>
+        <geom class="visual" rgba="0.7373 0.4196 0 1" mesh="FL_bot_sus_bar"/>
+        <geom type="capsule" pos="-0.06 0 0.015" euler="0 1.5708 0" size="0.02 0.09" class="collision"/>
+
+        <body name="FL_sus_cover" pos="-0.16 0 0.005">
+          <inertial pos="-0.019418 -0.0242697 -0.00192197" quat="0.509544 0.49027 -0.509544 0.49027" mass="0.0574115" diaginertia="2.10642e-05 1.97255e-05 5.68259e-06"/>
+          <joint name="FL_sus_link_joint" pos="0 0 0" axis="0 0 1"/>
+          <geom class="visual" rgba="0.7373 0.4196 0 1" mesh="FL_sus_cover"/>
+
+          <body name="FL_steer_link" pos="-0.03 0 0" quat="0.707176 0.707037 0 0">
+            <inertial pos="-0.0239659 -4.9413e-09 -0.0410337" quat="0.581915 0.401715 0.401715 0.581915" mass="0.0918925" diaginertia="9.50909e-05 8.25005e-05 2.29282e-05"/>
+            <joint name="FL_steer_rev" pos="0 0 0" axis="0 0 1"/>
+            <geom class="visual" rgba="0.7373 0.4196 0 1" mesh="FL_steer_link"/>
+            <geom type="cylinder" pos="0.00001 0 -0.001" size="0.015 0.06" class="collision"/>
+
+            <body name="FL_wheel" pos="-0.080193 0 -0.04969" quat="0.499022 0.500974 -0.500976 -0.499024">
+              <inertial pos="0 0 0.0823537" quat="0.5 0.5 -0.5 0.5" mass="6.43656" diaginertia="0.084475 0.0499813 0.0499813"/>
+              <joint name="FL_drive_act" pos="0 0 0" axis="0 0 1"/>
+              <geom class="visual" rgba="0. 0. 0. 1" mesh="FL_wheel"/>
+              <geom type="cylinder" pos="0 0 0.0823537" size="0.15 0.06" class="collision"/>
+
+              <site type="cylinder" name="end_point_FL" pos="0 0 0.0823537" euler="0 0 0.6981" size="0.15 0.06" rgba="0 0 1 0" />
+
+            </body>
+          </body>
+        </body>
+      </body>
+
+      <body name="FR_bot_sus_bar" pos="0.587 -1.3 -0.0422" quat="0.499998 -0.5 0.500002 -0.5">
+        <inertial pos="0.0799943 -0.026068 0.005" quat="0.00472016 0.707091 -0.00472016 0.707091" mass="0.187288" diaginertia="0.000459009 0.000435537 3.04959e-05"/>
+        <joint name="FR_sus_act" pos="0 0 0" axis="0 0 -1"/>
+        <geom class="visual" rgba="0.7373 0.4196 0 1" mesh="FR_bot_sus_bar"/>
+        <geom type="capsule" pos="0.06 0 0.015" euler="0 1.5708 0" size="0.02 0.09" class="collision"/>
+
+        <body name="FR_sus_cover" pos="0.16 0 0.005">
+          <inertial pos="0.0184682 -0.025 -0.00192197" quat="0.5 0.5 -0.5 0.5" mass="0.0574115" diaginertia="2.10642e-05 1.97255e-05 5.68259e-06"/>
+          <joint name="FR_sus_link_joint" pos="0 0 0" axis="0 0 -1"/>
+          <geom class="visual" rgba="0.7373 0.4196 0 1" mesh="FR_sus_cover"/>
+
+          <body name="FR_steer_link" pos="0.03 0 0" quat="0.707176 0.707037 0 0">
+            <inertial pos="0.0239659 8.55307e-10 -0.0410337" quat="0.401715 0.581915 0.581915 0.401715" mass="0.0918925" diaginertia="9.50909e-05 8.25005e-05 2.29282e-05"/>
+            <joint name="FR_steer_rev" pos="0 0 0" axis="0 0 1"/>
+            <geom class="visual" rgba="0.7373 0.4196 0 1" mesh="FR_steer_link"/>
+            <geom type="cylinder" pos="0.00001 0 -0.001" size="0.015 0.06" class="collision"/>
+
+            <body name="FR_wheel" pos="0.08 0 -0.05" quat="0.499022 0.500974 -0.500976 -0.499024">
+              <inertial pos="-0.000819113 -0.000732501 -0.0823463" quat="0.504688 0.500263 -0.495267 0.499737" mass="6.43656" diaginertia="0.084475 0.0499813 0.0499813"/>
+              <joint name="FR_drive_act" pos="0 0 0" axis="0 0 1"/>
+              <geom class="visual" rgba="0. 0. 0. 1" mesh="FR_wheel"/>
+              <geom type="cylinder" pos="0 0 -0.0823537" size="0.15 0.06" class="collision"/>
+
+
+              <site type="cylinder" name="end_point_FR" pos="0 0 -0.0823537" size="0.15 0.06" rgba="0 0 1 0" />
+
+            </body>
+          </body>
+        </body>
+      </body>
+
+      <body name="RL_bot_sus_bar" pos="-0.493 -0.88 -0.0422" quat="0.499998 -0.5 0.500002 -0.5">
+        <inertial pos="-0.0808662 -0.0252948 -0.005" quat="-0.00136913 0.707105 0.00136913 0.707105" mass="0.187288" diaginertia="0.000459009 0.000435537 3.04959e-05"/>
+        <joint name="RL_sus_act" pos="0 0 0" axis="0 0 1"/>
+        <geom class="visual" rgba="0.7373 0.4196 0 1" mesh="RL_bot_sus_bar"/>
+        <geom type="capsule" pos="-0.06 0 -0.015" euler="0 1.5708 0" size="0.02 0.09" class="collision"/>
+
+
+        <body name="RL_sus_cover" pos="-0.16 0 -0.005">
+          <inertial pos="-0.0184682 -0.025 0.00192197" quat="0.5 0.5 -0.5 0.5" mass="0.0574115" diaginertia="2.10642e-05 1.97255e-05 5.68259e-06"/>
+          <joint name="RL_sus_link_joint" pos="0 0 0" axis="0 0 1"/>
+          <geom type="mesh" rgba="0.7373 0.4196 0 1" mesh="RL_sus_cover"/>
+
+          <body name="RL_steer_link" pos="-0.03 0 0" quat="0.707176 0.707037 0 0">
+            <inertial pos="-0.0241244 -8.55307e-10 -0.0409407" quat="0.402839 0.581137 0.581137 0.402839" mass="0.0918925" diaginertia="9.50909e-05 8.25005e-05 2.29282e-05"/>
+            <joint name="RL_steer_rev" pos="0 0 0" axis="0 0 1"/>
+            <geom class="visual" rgba="0.7373 0.4196 0 1" mesh="RL_steer_link"/>
+            <geom type="cylinder" pos="0.00001 0 -0.001" size="0.015 0.06" class="collision"/>
+
+
+            <body name="RL_wheel" pos="-0.0802 0 -0.05" quat="0.499022 0.500974 -0.500976 -0.499024">
+              <inertial pos="0 0 0.0823537" quat="0.5 0.5 -0.5 0.5" mass="6.43656" diaginertia="0.084475 0.0499813 0.0499813"/>
+              <joint name="RL_drive_act" pos="0 0 0" axis="0 0 1"/>
+              <geom class="visual" rgba="0. 0. 0. 1" mesh="RL_wheel"/>
+              <geom type="cylinder" pos="0 0 0.0823537" size="0.15 0.06" class="collision"/>
+
+              <site type="cylinder" name="end_point_RL" pos="0 0 0.0823537" size="0.15 0.06" rgba="0 0 1 0" />
+
+            </body>
+          </body>
+        </body>
+      </body>
+
+      <body name="RR_bot_sus_bar" pos="-0.493 -1.3 -0.0422" quat="0.499998 -0.5 0.500002 -0.5">
+        <inertial pos="0.0808662 -0.0252948 -0.005" quat="0.00136913 0.707105 -0.00136913 0.707105" mass="0.187288" diaginertia="0.000459009 0.000435537 3.04959e-05"/>
+        <joint name="RR_sus_act" pos="0 0 0" axis="0 0 -1"/>
+        <geom class="visual" rgba="0.7373 0.4196 0 1" mesh="RR_bot_sus_bar"/>
+        <geom type="capsule" pos="0.06 0 -0.015" euler="0 1.5708 0" size="0.02 0.09" class="collision"/>
+
+        <body name="RR_sus_cover" pos="0.16 0 -0.005">
+          <inertial pos="0.0184682 -0.025 0.00192197" quat="0.5 0.5 -0.5 0.5" mass="0.0574115" diaginertia="2.10642e-05 1.97255e-05 5.68259e-06"/>
+          <joint name="RR_sus_link_joint" pos="0 0 0" axis="0 0 -1"/>
+          <geom class="visual" rgba="0.7373 0.4196 0 1" mesh="RR_sus_cover"/>
+
+          <body name="RR_steer_link" pos="0.03 0 0" quat="0.707176 0.707037 0 0">
+            <inertial pos="0.0241244 4.9413e-09 -0.0409407" quat="0.402839 0.581137 0.581137 0.402839" mass="0.0918925" diaginertia="9.50909e-05 8.25005e-05 2.29282e-05"/>
+            <joint name="RR_steer_rev" pos="0 0 0" axis="0 0 1"/>
+            <geom class="visual" rgba="0.7373 0.4196 0 1" mesh="RR_steer_link"/>
+            <geom type="cylinder" pos="0.00001 0 -0.001" size="0.015 0.06" class="collision"/>
+
+
+            <body name="RR_wheel" pos="0.0802 0 -0.05" quat="0.499022 0.500974 -0.500976 -0.499024">
+              <inertial pos="0 0 -0.0823537" quat="0.5 0.5 -0.5 0.5" mass="6.43656" diaginertia="0.084475 0.0499813 0.0499813"/>
+              <joint name="RR_drive_act" pos="0 0 0" axis="0 0 1"/>
+              <geom class="visual" rgba="0. 0. 0. 1" mesh="RR_wheel"/>
+              <geom type="cylinder" pos="0 0 -0.0823537" size="0.15 0.06" class="collision"/>
+
+
+              <site type="cylinder" name="end_point_RR" pos="0 0 -0.0823537" size="0.15 0.06" rgba="0 0 1 0" />
+
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <motor name="FL_sus_motor" joint="FL_sus_act" gear="1" ctrlrange="-100 100" />
+    <motor name="FL_steer_motor" joint="FL_steer_rev" gear="1" ctrlrange="-100 100" />
+    <motor name="FL_drive_motor" joint="FL_drive_act" gear="1" ctrlrange="-100 100" />
+    <motor name="FR_sus_motor" joint="FR_sus_act" gear="1" ctrlrange="-100 100" />
+    <motor name="FR_steer_motor" joint="FR_steer_rev" gear="1" ctrlrange="-100 100" />
+    <motor name="FR_drive_motor" joint="FR_drive_act" gear="1" ctrlrange="-100 100" />
+    <motor name="RL_sus_motor" joint="RL_sus_act" gear="1" ctrlrange="-100 100" />
+    <motor name="RL_steer_motor" joint="RL_steer_rev" gear="1" ctrlrange="-100 100" />
+    <motor name="RL_drive_motor" joint="RL_drive_act" gear="1" ctrlrange="-100 100" />
+    <motor name="RR_sus_motor" joint="RR_sus_act" gear="1" ctrlrange="-100 100" />
+    <motor name="RR_steer_motor" joint="RR_steer_rev" gear="1" ctrlrange="-100 100" />
+    <motor name="RR_drive_motor" joint="RR_drive_act" gear="1" ctrlrange="-100 100" />
+  </actuator>
+
+  <sensor>
+    <accelerometer site="imu" name="imu_acc" noise="0.0" />
+    <!--0 1 2-->
+    <gyro site="imu" name="imu_gyro" noise="0.0" />
+    <!--3 4 5-->
+    <framelinvel name="trunk_vel" objtype="site" objname="imu" />
+    <!--6 7 8-->
+    <frameangvel name="trunk_angvel" objtype="site" objname="imu" />
+    <!--9 10 11-->
+    <framepos name="trunk_pos" objtype="site" objname="imu" />
+    <!--12 13 14-->
+    <framequat name="trunk_ang" objtype="site" objname="imu" />
+    <!--15 16 17 18-->
+
+    <jointpos joint="FL_sus_act" name="ENC_FL_sus" noise="0.0" />
+    <jointpos joint="FL_steer_rev" name="ENC_FL_steer" noise="0.0" />
+    <jointpos joint="FL_drive_act" name="ENC_FL_drive" noise="0.0" />
+    <!--19 20 21-->
+
+    <jointpos joint="FR_sus_act" name="ENC_FR_sus" noise="0.0" />
+    <jointpos joint="FR_steer_rev" name="ENC_FR_steer" noise="0.0" />
+    <jointpos joint="FR_drive_act" name="ENC_FR_drive" noise="0.0" />
+    <!--22 23 24-->
+
+    <jointpos joint="RL_sus_act" name="ENC_RL_sus" noise="0.0" />
+    <jointpos joint="RL_steer_rev" name="ENC_RL_steer" noise="0.0" />
+    <jointpos joint="RL_drive_act" name="ENC_RL_drive" noise="0.0" />
+    <!--25 26 27-->
+
+    <jointpos joint="RR_sus_act" name="ENC_RR_sus" noise="0.0" />
+    <jointpos joint="RR_steer_rev" name="ENC_RR_steer" noise="0.0" />
+    <jointpos joint="RR_drive_act" name="ENC_RR_drive" noise="0.0" />
+    <!--28 29 30-->
+
+    <touch name="touch_sensor_FL" site="end_point_FL" />
+    <force name="grf_seonsor_FL" site="end_point_FL" />
+    <!--31 32 33 34-->
+
+    <touch name="touch_FR" site="end_point_FR" />
+    <force name="grf_seonsor_FR" site="end_point_FR" />
+    <!--35 36 37 38-->
+
+    <touch name="touch_RL" site="end_point_RL" />
+    <force name="grf_seonsor_RL" site="end_point_RL" />
+    <!--39 40 41 42-->
+
+    <touch name="touch_RR" site="end_point_RR" />
+    <force name="grf_seonsor_RR" site="end_point_RR" />
+    <!--43 44 45 46-->
+
+
+  </sensor>
+
+  <keyframe>
+    <!-- <key name="home" qpos="-4. 5. 0.245 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/> -->
+    <key name="home" qpos="0 0 0.5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
+  </keyframe>
+
+
+</mujoco>

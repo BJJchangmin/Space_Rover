@@ -1,0 +1,274 @@
+<mujoco model="quadrupedMCL">
+  <!-- <compiler angle="radian" meshdir="assets/meshes/" autolimits="true"/> -->
+  <compiler angle="radian" meshdir="assets/meshes/"/>
+
+  <option timestep="0.0001" integrator="RK4" gravity = "0 0 -9.81" cone="elliptic" impratio="100">
+    <flag sensornoise="enable" energy="enable" contact="enable" />
+  </option>
+
+  <default>
+    <default class="quadrupedMCL">
+      <geom friction="0.6" margin="0.001" condim="1"/>
+      <joint axis="0 0 -1" armature="0.05" damping="2" stiffness="0" frictionloss="0.1"/>
+      <!-- <motor ctrlrange="-0.7 0.7" gear="100"/> -->
+
+      <default class="abduction">
+        <joint axis="1 0 0" range="-1.0472 1.0472"/>
+        <!-- <motor gear="50"/> -->
+      </default>
+
+      <default class="hip">
+        <joint range="-0.2 3.14"/>
+      </default>
+
+      <default class="knee">
+        <joint range="-0.2 2.8"/>
+      </default>
+
+      <default class="visual">
+        <geom type="mesh" contype="0" conaffinity="0" group="2"/>
+      </default>
+
+      <default class="collision">
+        <geom group="3" type="capsule"/>
+        <default class="foot">
+          <geom size="0.022" pos="-0.002 0 -0.213" priority="1" solimp="0.015 1 0.031" condim="6" friction="0.8 0.02 0.01"/>
+        </default>
+      </default>
+    </default>
+  </default>
+
+  <asset>
+    <material name="dark" rgba="0.2 0.2 0.2 1" />
+    <material name="metal" rgba=".9 .95 .95 1"/>
+    <material name="black" rgba="0 0 0 1"/>
+    <material name="white" rgba="1 1 1 1"/>
+    <material name="gray" rgba="0.671705 0.692426 0.774270 1"/>
+
+    <mesh name="trunk" file="trunk.STL" />
+    <mesh name="torso_FL" file="torso_FL.STL" />
+    <mesh name="thigh_FL" file="thigh_FL.STL" />
+    <mesh name="shank_FL" file="shank_FL.STL" />
+    <mesh name="torso_FR" file="torso_FR.STL" />
+    <mesh name="thigh_FR" file="thigh_FR.STL" />
+    <mesh name="shank_FR" file="shank_FR.STL" />
+    <mesh name="torso_RL" file="torso_RL.STL" />
+    <mesh name="thigh_RL" file="thigh_RL.STL" />
+    <mesh name="shank_RL" file="shank_RL.STL" />
+    <mesh name="torso_RR" file="torso_RR.STL" />
+    <mesh name="thigh_RR" file="thigh_RR.STL" />
+    <mesh name="shank_RR" file="shank_RR.STL" />
+  </asset>
+
+  <worldbody>
+    <light diffuse=".5 .5 .5" pos="0 0 3" dir="0 0 -1"/>
+    <body name="trunk" pos="0 0 0.4" euler="-1.57 0 0">
+      <inertial pos="0 0 0" euler="0 0 0" mass="28" diaginertia="0.1619 1.1622 1.0325"/>
+      <freejoint/>
+      <site type="box" name="imu" pos="0 0 0" size="0.1 0.05 0.05" rgba="0 0.5 0 1" />
+
+      <geom type="mesh" mesh="trunk" material="gray" class="visual" />
+      <geom type="box" size="0.414 0.0415 0.14" class="collision" />
+
+      <body name="torso_FL" pos="0 0 0" euler="0 0 0">
+        <inertial pos="0.3 0 0.12" euler="0 0 0" mass="2.5" diaginertia="0.0040 0.0106 0.0095" />
+        <joint name="HAA_FL" class="abduction" pos="0.1958 0 0.095" />
+        <geom type="mesh" mesh="torso_FL" material="dark" class="visual" />
+        <site type="sphere" name="hip_FL" pos="0.3 0 0.12" size="0.05" rgba="0 0.5 0 0.0" />
+
+        <body name="thigh_FL" pos="0 0 0">
+          <inertial pos="0.22 0 0.204" euler="0 0 0" mass="1.017" diaginertia="6.2715e-04 0.0055 0.0057" />
+          <joint name="HFE_FL" class="hip" pos="0.3393 0 0.1675"/>
+          <geom type="mesh" mesh="thigh_FL" material="metal" class="visual" />
+          <geom size="0.025 0.125" pos="0.2143 0 0.2" euler="0 1.57 0" class="collision" />
+
+          <body name="shank_FL" pos="0 0 0">
+            <inertial pos="-0.03 0 0.204" euler="0 0 0" mass="0.143" diaginertia="6.3158e-05 7.4956e-04 8.0318e-04" />
+            <joint name="KFE_FL" class="knee" pos="0.0893 0 0.17929"/>
+            <geom type="mesh" mesh="shank_FL" material="white" contype="1" conaffinity="0" group="2" />
+
+            <site type="sphere" name="foot_FL" pos="-0.151 0.02 0.2" size="0.03" rgba="0 0 1 1" />
+          </body>
+        </body>
+      </body>
+
+
+      <body name="torso_FR" pos="0 0 0" euler="0 0 0">
+        <inertial pos="0.3 0 -0.12" euler="0 0 0" mass="2.5" diaginertia="0.0040 0.0106 0.0095" />
+        <joint name="HAA_FR" class="abduction" pos="0.1958 0 -0.095" />
+        <geom type="mesh" mesh="torso_FR" material="dark" class="visual" />
+        <site type="sphere" name="hip_FR" pos="0.3 0 -0.12" size="0.05" rgba="0 0.5 0 0.0" />
+
+        <body name="thigh_FR" pos="0 0 0">
+          <inertial pos="0.22 0 -0.204" euler="0 0 0" mass="1.017" diaginertia="6.2715e-04 0.0055 0.0057" />
+          <joint name="HFE_FR" class="hip" pos="0.3393 0 -0.1675"/>
+          <geom type="mesh" mesh="thigh_FR" material="metal" class="visual" />
+          <geom size="0.02 0.125" pos="0.2143 0 -0.2" euler="0 1.57 0" class="collision" />
+
+          <body name="shank_FR" pos="0 0 0">
+            <inertial pos="-0.03 0 -0.204" euler="0 0 0" mass="0.143" diaginertia="6.3158e-05 7.4956e-04 8.0318e-04" />
+            <joint name="KFE_FR" class="knee" pos="0.0893 0 -0.17929"/>
+            <geom type="mesh" mesh="shank_FR" material="white" contype="1" conaffinity="0" group="2" />
+
+            <site type="sphere" name="foot_FR" pos="-0.151 0.02 -0.2" size="0.03" rgba="0. 0.5 0 0.0" />
+          </body>
+        </body>
+      </body>
+
+      <body name="torso_RL" pos="0 0 0" euler="0 0 0">
+        <inertial pos="-0.28 0 0.12" euler="0 0 0" mass="2.5" diaginertia="0.0040 0.0106 0.0095" />
+        <joint name="HAA_RL" class="abduction" pos="-0.17717 0 0.095"/>
+        <geom type="mesh" mesh="torso_RL" material="dark" class="visual" />
+        <site type="sphere" name="hip_RL" pos="-0.28 0 0.12" size="0.05" rgba="0 0.5 0 0.0" />
+
+        <body name="thigh_RL" pos="0 0 0">
+          <inertial pos="-0.44 0 0.204" euler="0 0 0" mass="1.017" diaginertia="6.2715e-04 0.0055 0.0057" />
+          <joint name="HFE_RL" class="hip" pos="-0.32067 0 0.1675"/>
+          <geom type="mesh" mesh="thigh_RL" material="metal" class="visual" />
+          <geom size="0.02 0.125" pos="-0.44567 0 0.204" euler="0 1.57 0" class="collision" />
+
+          <body name="shank_RL" pos="0 0 0">
+            <inertial pos="-0.69 0 0.204" euler="0 0 0" mass="0.143" diaginertia="6.3158e-05 7.4956e-04 8.0318e-04" />
+            <joint name="KFE_RL" class="knee" pos="-0.57067 0 0.17929"/>
+            <geom type="mesh" mesh="shank_RL" material="white" contype="1" conaffinity="0" group="2" />
+
+            <site type="sphere" name="foot_RL" pos="-0.811 0.02 0.2" size="0.03" rgba="0. 0.5 0 0.0" />
+          </body>
+        </body>
+      </body>
+
+      <body name="torso_RR" pos="0 0 0" euler="0 0 0">
+        <inertial pos="-0.28 0 -0.12" euler="0 0 0" mass="2.5" diaginertia="0.0040 0.0106 0.0095" />
+        <joint name="HAA_RR" class="abduction" pos="-0.17717 0 -0.095"/>
+        <geom type="mesh" mesh="torso_RR" material="dark" class="visual" />
+        <site type="sphere" name="hip_RR" pos="-0.28 0 -0.12" size="0.05" rgba="0 0.5 0 0.0" />
+
+        <body name="thigh_RR" pos="0 0 0">
+          <inertial pos="-0.44 0 -0.204" euler="0 0 0" mass="1.017" diaginertia="6.2715e-04 0.0055 0.0057" />
+          <joint name="HFE_RR" class="hip" pos="-0.32067 0 -0.1675"/>
+          <geom type="mesh" mesh="thigh_RR" material="metal" class="visual" />
+          <geom size="0.02 0.125" pos="-0.44567 0 -0.204" euler="0 1.57 0" class="collision" />
+
+          <body name="shank_RR" pos="0 0 0">
+            <inertial pos="-0.69 0 -0.204" euler="0 0 0" mass="0.143" diaginertia="6.3158e-05 7.4956e-04 8.0318e-04" />
+            <joint name="KFE_RR" class="knee" pos="-0.57067 0 -0.17929"/>
+            <geom type="mesh" mesh="shank_RR" material="white" contype="1" conaffinity="0" group="2" />
+
+            <site type="sphere" name="foot_RR" pos="-0.811 0.02 -0.2" size="0.03" rgba="0. 0.5 0 0." />
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <motor name="torque_HAA_FL" joint="HAA_FL" gear="1" ctrllimited="true" ctrlrange="-100 100" />
+    <motor name="torque_HFE_FL" joint="HFE_FL" gear="1" ctrllimited="true" ctrlrange="-100 100" />
+    <motor name="torque_KFE_FL" joint="KFE_FL" gear="1" ctrllimited="true" ctrlrange="-100 100" />
+    <motor name="torque_HAA_FR" joint="HAA_FR" gear="1" ctrllimited="true" ctrlrange="-100 100" />
+    <motor name="torque_HFE_FR" joint="HFE_FR" gear="1" ctrllimited="true" ctrlrange="-100 100" />
+    <motor name="torque_KFE_FR" joint="KFE_FR" gear="1" ctrllimited="true" ctrlrange="-100 100" />
+    <motor name="torque_HAA_RL" joint="HAA_RL" gear="1" ctrllimited="true" ctrlrange="-100 100" />
+    <motor name="torque_HFE_RL" joint="HFE_RL" gear="1" ctrllimited="true" ctrlrange="-100 100" />
+    <motor name="torque_KFE_RL" joint="KFE_RL" gear="1" ctrllimited="true" ctrlrange="-100 100" />
+    <motor name="torque_HAA_RR" joint="HAA_RR" gear="1" ctrllimited="true" ctrlrange="-100 100" />
+    <motor name="torque_HFE_RR" joint="HFE_RR" gear="1" ctrllimited="true" ctrlrange="-100 100" />
+    <motor name="torque_KFE_RR" joint="KFE_RR" gear="1" ctrllimited="true" ctrlrange="-100 100" />
+  </actuator>
+
+  <sensor>
+    <accelerometer site="imu" name="imu_accl" noise="0.0" />
+    <!--0 1 2-->
+    <gyro site="imu" name="imu_gyro" noise="0.0" />
+    <!--3 4 5-->
+
+    <jointpos joint="HAA_FL" name="ENC_HAA_FL" noise="0.0" />
+    <!--6-->
+    <jointpos joint="HFE_FL" name="ENC_HFE_FL" noise="0.0" />
+    <!--7-->
+    <jointpos joint="KFE_FL" name="ENC_KFE_FL" noise="0.0" />
+    <!--8-->
+
+    <jointpos joint="HAA_FR" name="ENC_HAA_FR" noise="0.0" />
+    <!--9-->
+    <jointpos joint="HFE_FR" name="ENC_HFE_FR" noise="0.0" />
+    <!--10-->
+    <jointpos joint="KFE_FR" name="ENC_KFE_FR" noise="0.0" />
+    <!--11-->
+
+    <jointpos joint="HAA_RL" name="ENC_HAA_RL" noise="0.0" />
+    <!--12-->
+    <jointpos joint="HFE_RL" name="ENC_HFE_RL" noise="0.0" />
+    <!--13-->
+    <jointpos joint="KFE_RL" name="ENC_KFE_RL" noise="0.0" />
+    <!--14-->
+
+    <jointpos joint="HAA_RR" name="ENC_HAA_RR" noise="0.0" />
+    <!--15-->
+    <jointpos joint="HFE_RR" name="ENC_HFE_RR" noise="0.0" />
+    <!--16-->
+    <jointpos joint="KFE_RR" name="ENC_KFE_RR" noise="0.0" />
+    <!--17-->
+
+    <touch name="touch_sensor_FL" site="foot_FL" />
+    <!--18-->
+    <force name="grf_sensor_FL" site="foot_FL" />
+    <!--19 20 21-->
+
+    <touch name="touch_sensor_FR" site="foot_FR" />
+    <!--22-->
+    <force name="grf_sensor_FR" site="foot_FR" />
+    <!--23 24 25-->
+
+    <touch name="touch_sensor_RL" site="foot_RL" />
+    <!--26-->
+    <force name="grf_sensor_RL" site="foot_RL" />
+    <!--27 28 29-->
+
+    <touch name="touch_sensor_RR" site="foot_RR" />
+    <!--30-->
+    <force name="grf_sensor_RR" site="foot_RR" />
+    <!--31 32 33-->
+
+    <framelinvel name="trunk_vel" objtype="site" objname="imu" />
+    <!--34 35 36-->
+    <framepos name="trunk_pos" objtype="site" objname="imu" />
+    <!--37 38 39-->
+    <framequat name="trunk_quat" objtype="site" objname="imu" />
+    <!--40 41 42 43-->
+
+    <framepos name="FL_pos" objtype="site" objname="foot_FL" />
+    <!--44 45 46-->
+    <framepos name="FR_pos" objtype="site" objname="foot_FR" />
+    <!--47 48 49-->
+    <framepos name="RL_pos" objtype="site" objname="foot_RL" />
+    <!--50 51 52-->
+    <framepos name="RR_pos" objtype="site" objname="foot_RR" />
+    <!--53 54 55-->
+
+    <framelinvel name="FL_vel" objtype="site" objname="foot_FL" />
+    <!--56 57 58-->
+    <framelinvel name="FR_vel" objtype="site" objname="foot_FR" />
+    <!--59 60 61-->
+    <framelinvel name="RL_vel" objtype="site" objname="foot_RL" />
+    <!--62 63 64-->
+    <framelinvel name="RR_vel" objtype="site" objname="foot_RR" />
+    <!--65 66 67-->
+
+    <frameangvel name="trunk_omega" objtype="site" objname="imu" />
+    <!--68 69 70-->
+
+    <framelinvel name="hip_FL_vel" objtype="site" objname="hip_FL" />
+    <!--71 72 73-->
+    <framelinvel name="hip_FR_vel" objtype="site" objname="hip_FR" />
+    <!--74 75 76-->
+    <framelinvel name="hip_RL_vel" objtype="site" objname="hip_RL" />
+    <!--77 78 79-->
+    <framelinvel name="hip_RR_vel" objtype="site" objname="hip_RR" />
+    <!--80 81 82-->
+  </sensor>
+
+  <keyframe>
+    <key name="home" qpos="0. 0. 0.3536 -0.9999 0.9999 0. 0. 0. 0.7854 1.5708 0. 0.7854 1.5708 0. 0.7854 1.5708 0. 0.7854 1.5708" />
+  </keyframe>
+</mujoco>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="urdf_legFL5">
+  <link
+    name="hip_link">
+    <inertial>
+      <origin
+        xyz="0.101952223102955 0.026085075446071 0.000461086736221096"
+        rpy="0 0 0" />
+      <mass
+        value="1.04699511498871" />
+      <inertia
+        ixx="0.000683259983279619"
+        ixy="-8.02532206161205E-07"
+        ixz="-2.50478197684964E-05"
+        iyy="0.000829425476550375"
+        iyz="-9.9562465515616E-07"
+        izz="0.000877388696364655" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_legFL5/meshes/hip_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_legFL5/meshes/hip_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="thigh_Link">
+    <inertial>
+      <origin
+        xyz="-0.13384 0.034188 0.0090545"
+        rpy="0 0 0" />
+      <mass
+        value="0.27861" />
+      <inertia
+        ixx="4.6512E-05"
+        ixy="3.6254E-07"
+        ixz="3.2462E-05"
+        iyy="0.00066413"
+        iyz="-2.2252E-07"
+        izz="0.00062539" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_legFL5/meshes/thigh_Link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_legFL5/meshes/thigh_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="HFE"
+    type="revolute">
+    <origin
+      xyz="0.1435 0 0.071053"
+      rpy="1.5708 0 0" />
+    <parent
+      link="hip_link" />
+    <child
+      link="thigh_Link" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="70"
+      velocity="100" />
+  </joint>
+  <link
+    name="shank_Link">
+    <inertial>
+      <origin
+        xyz="-0.129971495409493 0.0250334707273275 -0.00810863913628968"
+        rpy="0 0 0" />
+      <mass
+        value="0.287352529705375" />
+      <inertia
+        ixx="6.07208362511188E-05"
+        ixy="-2.24205563785004E-06"
+        ixz="-8.4406151458307E-05"
+        iyy="0.000335455112490887"
+        iyz="-1.02117465511318E-06"
+        izz="0.000300747939810049" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_legFL5/meshes/shank_Link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_legFL5/meshes/shank_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="KFE"
+    type="continuous">
+    <origin
+      xyz="-0.25 0.0096514 0"
+      rpy="0 0 0" />
+    <parent
+      link="thigh_Link" />
+    <child
+      link="shank_Link" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="70"
+      velocity="100" />
+  </joint>
+</robot>

@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="asm_quadruped_urdf_global2">
+  <link
+    name="trunk">
+    <inertial>
+      <origin
+        xyz="0.0066819 -1.5496E-06 -4.069E-05"
+        rpy="0 0 0" />
+      <mass
+        value="3.9043" />
+      <inertia
+        ixx="0.0056295"
+        ixy="1.1505E-06"
+        ixz="3.4096E-07"
+        iyy="0.0057726"
+        iyz="2.6936E-07"
+        izz="0.0086203" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://asm_quadruped_urdf_global2/meshes/trunk.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://asm_quadruped_urdf_global2/meshes/trunk.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="torso_FL">
+    <inertial>
+      <origin
+        xyz="0.10484 0.028781 0.00052715"
+        rpy="0 0 0" />
+      <mass
+        value="0.90298" />
+      <inertia
+        ixx="0.00061694"
+        ixy="-8.0441E-07"
+        ixz="-7.7695E-06"
+        iyy="0.00079241"
+        iyz="-9.945E-07"
+        izz="0.00078387" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://asm_quadruped_urdf_global2/meshes/torso_FL.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://asm_quadruped_urdf_global2/meshes/torso_FL.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="HAA_FL"
+    type="revolute">
+    <origin
+      xyz="0.1958 0 0.095"
+      rpy="1.5708 0 0" />
+    <parent
+      link="trunk" />
+    <child
+      link="torso_FL" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="thigh_FL">
+    <inertial>
+      <origin
+        xyz="-0.0841820228042324 0.0323812254920831 0.0117646692013723"
+        rpy="0 0 0" />
+      <mass
+        value="0.197725067513953" />
+      <inertia
+        ixx="3.63731130183477E-05"
+        ixy="2.46376714816556E-07"
+        ixz="2.72820821144183E-05"
+        iyy="0.000648919844755292"
+        iyz="-2.63238413268589E-07"
+        izz="0.000619067262733183" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://asm_quadruped_urdf_global2/meshes/thigh_FL.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://asm_quadruped_urdf_global2/meshes/thigh_FL.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="HFE_FL"
+    type="revolute">
+    <origin
+      xyz="0.1435 0.0725 0"
+      rpy="0 0 0" />
+    <parent
+      link="torso_FL" />
+    <child
+      link="thigh_FL" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="shank_FL">
+    <inertial>
+      <origin
+        xyz="-0.145381737250951 0.0209975832186695 -0.00964787397728841"
+        rpy="0 0 0" />
+      <mass
+        value="0.123481337865861" />
+      <inertia
+        ixx="2.53270212023369E-05"
+        ixy="-8.30390976981495E-07"
+        ixz="-3.13810726732338E-05"
+        iyy="0.000126970769491323"
+        iyz="-3.78212835227106E-07"
+        izz="0.00011424652805886" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://asm_quadruped_urdf_global2/meshes/shank_FL.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://asm_quadruped_urdf_global2/meshes/shank_FL.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="KFE_FL"
+    type="revolute">
+    <origin
+      xyz="-0.25 0.011794 0"
+      rpy="0 0 0" />
+    <parent
+      link="thigh_FL" />
+    <child
+      link="shank_FL" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="torso_FR">
+    <inertial>
+      <origin
+        xyz="0.104820136702387 -0.0287811371973977 0.000527147399617903"
+        rpy="0 0 0" />
+      <mass
+        value="0.902977752384198" />
+      <inertia
+        ixx="0.000616937686058214"
+        ixy="-1.25306828651702E-07"
+        ixz="-5.81887468957732E-06"
+        iyy="0.000792405346779906"
+        iyz="9.94503533334041E-07"
+        izz="0.000783874594599424" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://asm_quadruped_urdf_global2/meshes/torso_FR.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://asm_quadruped_urdf_global2/meshes/torso_FR.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="HAA_FR"
+    type="revolute">
+    <origin
+      xyz="0.1958 0 -0.095"
+      rpy="1.5708 0 0" />
+    <parent
+      link="trunk" />
+    <child
+      link="torso_FR" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="thigh_FR">
+    <inertial>
+      <origin
+        xyz="-0.084082296396937 -0.0323849902334104 0.0117749829657437"
+        rpy="0 0 0" />
+      <mass
+        value="0.19773225607711" />
+      <inertia
+        ixx="3.63304963829386E-05"
+        ixy="-1.55662598874176E-07"
+        ixz="2.75332840428481E-05"
+        iyy="0.00064901836683965"
+        iyz="2.39187463816239E-07"
+        izz="0.000619208457707713" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://asm_quadruped_urdf_global2/meshes/thigh_FR.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://asm_quadruped_urdf_global2/meshes/thigh_FR.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="HFE_FR"
+    type="revolute">
+    <origin
+      xyz="0.1435 -0.0725 0"
+      rpy="0 0 0" />
+    <parent
+      link="torso_FR" />
+    <child
+      link="thigh_FR" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="shank_FR">
+    <inertial>
+      <origin
+        xyz="-0.145381737250951 -0.0214150403096949 -0.00964787397739331"
+        rpy="0 0 0" />
+      <mass
+        value="0.123481337865861" />
+      <inertia
+        ixx="2.53270212023369E-05"
+        ixy="-8.30390976981506E-07"
+        ixz="-3.13810726732337E-05"
+        iyy="0.000126970769491323"
+        iyz="-3.78212835227108E-07"
+        izz="0.00011424652805886" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://asm_quadruped_urdf_global2/meshes/shank_FR.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://asm_quadruped_urdf_global2/meshes/shank_FR.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="KFE_FR"
+    type="revolute">
+    <origin
+      xyz="-0.25 -0.011794 0"
+      rpy="0 0 0" />
+    <parent
+      link="thigh_FR" />
+    <child
+      link="shank_FR" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="torso_RL">
+    <inertial>
+      <origin
+        xyz="-0.103224568313515 0.0287457122923878 0.000507321218520848"
+        rpy="0 0 0" />
+      <mass
+        value="0.902220673039644" />
+      <inertia
+        ixx="0.000616568691968008"
+        ixy="-7.69171065211726E-07"
+        ixz="-2.05162497790683E-06"
+        iyy="0.000781784235121968"
+        iyz="-9.93264083041245E-07"
+        izz="0.000773620453879042" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://asm_quadruped_urdf_global2/meshes/torso_RL.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://asm_quadruped_urdf_global2/meshes/torso_RL.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="HAA_RL"
+    type="revolute">
+    <origin
+      xyz="-0.17717 0 0.095"
+      rpy="1.5708 0 0" />
+    <parent
+      link="trunk" />
+    <child
+      link="torso_RL" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="thigh_RL">
+    <inertial>
+      <origin
+        xyz="-0.0841820228042314 0.0323812254919711 0.0117646692013132"
+        rpy="0 0 0" />
+      <mass
+        value="0.197725067513951" />
+      <inertia
+        ixx="3.63731130183477E-05"
+        ixy="2.46376714817519E-07"
+        ixz="2.72820821144177E-05"
+        iyy="0.000648919844755276"
+        iyz="-2.63238413268672E-07"
+        izz="0.000619067262733166" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://asm_quadruped_urdf_global2/meshes/thigh_RL.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://asm_quadruped_urdf_global2/meshes/thigh_RL.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="HFE_RL"
+    type="revolute">
+    <origin
+      xyz="-0.1435 0.0725 0"
+      rpy="0 0 0" />
+    <parent
+      link="torso_RL" />
+    <child
+      link="thigh_RL" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="shank_RL">
+    <inertial>
+      <origin
+        xyz="-0.145381737250951 0.0209975832185437 -0.00964787397739134"
+        rpy="0 0 0" />
+      <mass
+        value="0.123481337865861" />
+      <inertia
+        ixx="2.53270212023369E-05"
+        ixy="-8.30390976981506E-07"
+        ixz="-3.13810726732337E-05"
+        iyy="0.000126970769491323"
+        iyz="-3.78212835227112E-07"
+        izz="0.00011424652805886" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://asm_quadruped_urdf_global2/meshes/shank_RL.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://asm_quadruped_urdf_global2/meshes/shank_RL.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="KFE_RL"
+    type="revolute">
+    <origin
+      xyz="-0.25 0.011794 0"
+      rpy="0 0 0" />
+    <parent
+      link="thigh_RL" />
+    <child
+      link="shank_RL" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="torso_RR">
+    <inertial>
+      <origin
+        xyz="-0.10324 -0.028746 0.00050732"
+        rpy="0 0 0" />
+      <mass
+        value="0.90222" />
+      <inertia
+        ixx="0.00061657"
+        ixy="-1.6055E-07"
+        ixz="-1.0102E-07"
+        iyy="0.00078178"
+        iyz="9.9327E-07"
+        izz="0.00077362" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://asm_quadruped_urdf_global2/meshes/torso_RR.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://asm_quadruped_urdf_global2/meshes/torso_RR.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="HAA_RR"
+    type="revolute">
+    <origin
+      xyz="-0.17717 0 -0.095"
+      rpy="1.5708 0 0" />
+    <parent
+      link="trunk" />
+    <child
+      link="torso_RR" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="thigh_RR">
+    <inertial>
+      <origin
+        xyz="-0.084082 -0.032385 0.011775"
+        rpy="0 0 0" />
+      <mass
+        value="0.19773" />
+      <inertia
+        ixx="3.633E-05"
+        ixy="-1.5566E-07"
+        ixz="2.7533E-05"
+        iyy="0.00064902"
+        iyz="2.3919E-07"
+        izz="0.00061921" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://asm_quadruped_urdf_global2/meshes/thigh_RR.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://asm_quadruped_urdf_global2/meshes/thigh_RR.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="HFE_RR"
+    type="revolute">
+    <origin
+      xyz="-0.1435 -0.0725 0"
+      rpy="0 0 0" />
+    <parent
+      link="torso_RR" />
+    <child
+      link="thigh_RR" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="shank_RR">
+    <inertial>
+      <origin
+        xyz="-0.14538 -0.021415 -0.0096479"
+        rpy="0 0 0" />
+      <mass
+        value="0.12348" />
+      <inertia
+        ixx="2.5327E-05"
+        ixy="-8.3039E-07"
+        ixz="-3.1381E-05"
+        iyy="0.00012697"
+        iyz="-3.7821E-07"
+        izz="0.00011425" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://asm_quadruped_urdf_global2/meshes/shank_RR.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://asm_quadruped_urdf_global2/meshes/shank_RR.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="KFE_RR"
+    type="revolute">
+    <origin
+      xyz="-0.25 -0.011794 0"
+      rpy="0 0 0" />
+    <parent
+      link="thigh_RR" />
+    <child
+      link="shank_RR" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+</robot>

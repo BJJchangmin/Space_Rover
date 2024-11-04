@@ -1,0 +1,975 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="Rover_3D_YCM">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="0.0473515293659103 -1.09000000000001 -0.00804920522636148"
+        rpy="0 0 0" />
+      <mass
+        value="1.33511107631683" />
+      <inertia
+        ixx="0.0579703787672758"
+        ixy="1.16551735424667E-15"
+        ixz="5.5947941252357E-17"
+        iyy="0.176562671233235"
+        iyz="3.72370848295154E-16"
+        izz="0.216789438489528" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="FL_bot_sus_bar">
+    <inertial>
+      <origin
+        xyz="-0.080044373743942 -0.0277859556288115 0.00500000000000023"
+        rpy="0 0 0" />
+      <mass
+        value="0.187287611019615" />
+      <inertia
+        ixx="3.09871777236785E-05"
+        ixy="-1.4097634849017E-05"
+        ixz="5.29667382257874E-22"
+        iyy="0.000435045346741071"
+        iyz="2.67381994296091E-22"
+        izz="0.000459009239051514" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/FL_bot_sus_bar.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/FL_bot_sus_bar.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FL_sus_act"
+    type="revolute">
+    <origin
+      xyz="0.58735 -0.88 -0.042158"
+      rpy="-1.5708 0 -1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="FL_bot_sus_bar" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="FL_sus_cover">
+    <inertial>
+      <origin
+        xyz="-0.0194179935482346 -0.024269656395888 -0.00192196538620693"
+        rpy="0 0 0" />
+      <mass
+        value="0.0574115008234622" />
+      <inertia
+        ixx="1.97046655246752E-05"
+        ixy="-5.40816407448792E-07"
+        ixz="-8.1525204499871E-23"
+        iyy="5.7034495945354E-06"
+        iyz="-1.47690183210744E-21"
+        izz="2.10642271925014E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/FL_sus_cover.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/FL_sus_cover.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FL_sus_link_joint"
+    type="revolute">
+    <origin
+      xyz="-0.1599 -0.0055723 0.005"
+      rpy="0 0 0" />
+    <parent
+      link="FL_bot_sus_bar" />
+    <child
+      link="FL_sus_cover" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="FL_steer_link">
+    <inertial>
+      <origin
+        xyz="-0.0239659449780238 -4.94130336647913E-09 -0.0410336803632135"
+        rpy="0 0 0" />
+      <mass
+        value="0.0918924650288386" />
+      <inertia
+        ixx="3.041459818155E-05"
+        ixy="1.29956620065639E-11"
+        ixz="-1.97468239352661E-05"
+        iyy="9.50909073588986E-05"
+        iyz="5.33886286399764E-12"
+        izz="7.50140737277149E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/FL_steer_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/FL_steer_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FL_steer_rev"
+    type="revolute">
+    <origin
+      xyz="-0.029978 0.0011562 0"
+      rpy="1.5708 0 0" />
+    <parent
+      link="FL_sus_cover" />
+    <child
+      link="FL_steer_link" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="FL_wheel">
+    <inertial>
+      <origin
+        xyz="4.10782519111308E-15 -2.1094237467878E-15 0.0823536740008911"
+        rpy="0 0 0" />
+      <mass
+        value="6.43655550433335" />
+      <inertia
+        ixx="0.0499812912629565"
+        ixy="-7.94658271721805E-18"
+        ixz="-1.29659343039721E-17"
+        iyy="0.0499812912629565"
+        iyz="-9.75781955236954E-18"
+        izz="0.0844750456481245" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/FL_wheel.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/FL_wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FL_drive_act"
+    type="revolute">
+    <origin
+      xyz="-0.08 0 -0.05"
+      rpy="3.1416 -1.5708 0" />
+    <parent
+      link="FL_steer_link" />
+    <child
+      link="FL_wheel" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="FR_bot_sus_bar">
+    <inertial>
+      <origin
+        xyz="0.0799942869401793 -0.0260680275600297 0.00500000000000034"
+        rpy="0 0 0" />
+      <mass
+        value="0.187287611019615" />
+      <inertia
+        ixx="3.05680980687413E-05"
+        ixy="5.40695131591209E-06"
+        ixz="-2.96026986399075E-19"
+        iyy="0.000435464426396009"
+        iyz="1.81966377093738E-22"
+        izz="0.000459009239051514" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/FR_bot_sus_bar.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/FR_bot_sus_bar.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FR_sus_act"
+    type="revolute">
+    <origin
+      xyz="0.58735 -1.3 -0.042158"
+      rpy="-1.5708 0 -1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="FR_bot_sus_bar" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="FR_sus_cover">
+    <inertial>
+      <origin
+        xyz="0.0184682076827578 -0.0249999999999898 -0.00192196538620704"
+        rpy="0 0 0" />
+      <mass
+        value="0.0574115008234622" />
+      <inertia
+        ixx="1.97255242345363E-05"
+        ixy="2.59856505925856E-20"
+        ixz="3.84706668935902E-22"
+        iyy="5.68259088467435E-06"
+        iyz="3.56778096623403E-21"
+        izz="2.10642271925014E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/FR_sus_cover.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/FR_sus_cover.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FR_sus_link_joint"
+    type="revolute">
+    <origin
+      xyz="0.15999 -0.0021361 0.005"
+      rpy="0 0 0" />
+    <parent
+      link="FR_bot_sus_bar" />
+    <child
+      link="FR_sus_cover" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="FR_steer_link">
+    <inertial>
+      <origin
+        xyz="0.0239659464425654 8.55307047409326E-10 -0.0410336802118222"
+        rpy="0 0 0" />
+      <mass
+        value="0.0918924614280398" />
+      <inertia
+        ixx="3.04145976081783E-05"
+        ixy="5.83714804272231E-12"
+        ixz="1.97468224950006E-05"
+        iyy="9.50909045089733E-05"
+        iyz="8.30647885303714E-13"
+        izz="7.50140708297281E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/FR_steer_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/FR_steer_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FR_steer_rev"
+    type="revolute">
+    <origin
+      xyz="0.03 0 0"
+      rpy="1.5708 0 0" />
+    <parent
+      link="FR_sus_cover" />
+    <child
+      link="FR_steer_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="FR_wheel">
+    <inertial>
+      <origin
+        xyz="-0.000819113309469155 -0.000732500738326314 -0.0823463424658286"
+        rpy="0 0 0" />
+      <mass
+        value="6.43655550433335" />
+      <inertia
+        ixx="0.0499847036829215"
+        ixy="3.05159263675429E-06"
+        ixz="0.000343054251255115"
+        iyy="0.0499840201819395"
+        iyz="0.000306779891653701"
+        izz="0.0844689043091764" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/FR_wheel.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/FR_wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FR_drive_act"
+    type="revolute">
+    <origin
+      xyz="0.08 0 -0.05"
+      rpy="-1.5508 0.84128 1.5857" />
+    <parent
+      link="FR_steer_link" />
+    <child
+      link="FR_wheel" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="RL_bot_sus_bar">
+    <inertial>
+      <origin
+        xyz="-0.0792255875514762 -0.0283184441850559 -0.00500000000000039"
+        rpy="0 0 0" />
+      <mass
+        value="0.187287611019616" />
+      <inertia
+        ixx="3.11970188188486E-05"
+        ixy="-1.68370806183862E-05"
+        ixz="-2.56130006491929E-19"
+        iyy="0.000434835505645902"
+        iyz="-3.78193382387043E-21"
+        izz="0.000459009239051515" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/RL_bot_sus_bar.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/RL_bot_sus_bar.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RL_sus_act"
+    type="revolute">
+    <origin
+      xyz="-0.49265 -0.88 -0.042158"
+      rpy="-1.5708 0 -1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="RL_bot_sus_bar" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="RL_sus_cover">
+    <inertial>
+      <origin
+        xyz="-0.0184682076827586 -0.025 0.00192196538620693"
+        rpy="0 0 0" />
+      <mass
+        value="0.0574115008234622" />
+      <inertia
+        ixx="1.97255242345363E-05"
+        ixy="-1.20732718399827E-20"
+        ixz="2.99869249314565E-22"
+        iyy="5.68259088467435E-06"
+        iyz="-2.14031584055717E-21"
+        izz="2.10642271925014E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/RL_sus_cover.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/RL_sus_cover.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RL_sus_link_joint"
+    type="revolute">
+    <origin
+      xyz="-0.15986 -0.0066568 -0.005"
+      rpy="0 0 0" />
+    <parent
+      link="RL_bot_sus_bar" />
+    <child
+      link="RL_sus_cover" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="RL_steer_link">
+    <inertial>
+      <origin
+        xyz="-0.023965946442565 -8.55306880875872E-10 -0.0410336802118223"
+        rpy="0 0 0" />
+      <mass
+        value="0.0918924614280402" />
+      <inertia
+        ixx="3.04145976081785E-05"
+        ixy="5.83714800502935E-12"
+        ixz="-1.97468224950007E-05"
+        iyy="9.50909045089737E-05"
+        iyz="-8.30647931467732E-13"
+        izz="7.50140708297284E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/RL_steer_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/RL_steer_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RL_steer_rev"
+    type="revolute">
+    <origin
+      xyz="-0.03 0 0"
+      rpy="1.5708 0 0" />
+    <parent
+      link="RL_sus_cover" />
+    <child
+      link="RL_steer_link" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="RL_wheel">
+    <inertial>
+      <origin
+        xyz="-9.71445146547012E-17 1.55431223447522E-15 0.0823536740008906"
+        rpy="0 0 0" />
+      <mass
+        value="6.43655550433335" />
+      <inertia
+        ixx="0.0499812912629565"
+        ixy="7.00481446295617E-18"
+        ixz="1.22399659351768E-19"
+        iyy="0.0499812912629565"
+        iyz="2.17924636669586E-17"
+        izz="0.0844750456481245" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/RL_wheel.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/RL_wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RL_drive_act"
+    type="revolute">
+    <origin
+      xyz="-0.08 0 -0.05"
+      rpy="3.1416 -1.5708 0" />
+    <parent
+      link="RL_steer_link" />
+    <child
+      link="RL_wheel" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="RR_bot_sus_bar">
+    <inertial>
+      <origin
+        xyz="0.08086615954778 -0.0252947689900355 -0.00500000000000012"
+        rpy="0 0 0" />
+      <mass
+        value="0.187287611019616" />
+      <inertia
+        ixx="3.05019810225244E-05"
+        ixy="1.56850304934077E-06"
+        ixz="2.14851926697412E-22"
+        iyy="0.000435530543442226"
+        iyz="-8.21076946158093E-22"
+        izz="0.000459009239051515" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/RR_bot_sus_bar.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/RR_bot_sus_bar.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RR_sus_act"
+    type="revolute">
+    <origin
+      xyz="-0.49265 -1.3 -0.042158"
+      rpy="-1.5708 0 -1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="RR_bot_sus_bar" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="RR_sus_cover">
+    <inertial>
+      <origin
+        xyz="0.0184682076827591 -0.0250000000000061 0.00192196538620698"
+        rpy="0 0 0" />
+      <mass
+        value="0.0574115008234622" />
+      <inertia
+        ixx="1.97255242345363E-05"
+        ixy="-1.27423600689094E-20"
+        ixz="1.25377622393565E-22"
+        iyy="5.68259088467433E-06"
+        iyz="-3.50986092648425E-21"
+        izz="2.10642271925014E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/RR_sus_cover.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/RR_sus_cover.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RR_sus_link_joint"
+    type="revolute">
+    <origin
+      xyz="0.16 -0.0006196 -0.005"
+      rpy="0 0 0" />
+    <parent
+      link="RR_bot_sus_bar" />
+    <child
+      link="RR_sus_cover" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="RR_steer_link">
+    <inertial>
+      <origin
+        xyz="0.0241243667669602 4.94130347750144E-09 -0.0409407421883529"
+        rpy="0 0 0" />
+      <mass
+        value="0.0918924650288373" />
+      <inertia
+        ixx="3.02626172364064E-05"
+        ixy="1.3016200662628E-11"
+        ixz="1.95738521215499E-05"
+        iyy="9.50909073588972E-05"
+        iyz="-5.28859307727423E-12"
+        izz="7.51660546728571E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/RR_steer_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/RR_steer_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="RR_steer_rev"
+    type="revolute">
+    <origin
+      xyz="0.03 0 0"
+      rpy="1.5706 0 0" />
+    <parent
+      link="RR_sus_cover" />
+    <child
+      link="RR_steer_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="RR_wheel">
+    <inertial>
+      <origin
+        xyz="-2.99760216648792E-15 5.62050406216485E-15 -0.0823536740008914"
+        rpy="0 0 0" />
+      <mass
+        value="6.43655550433335" />
+      <inertia
+        ixx="0.0499812912629564"
+        ixy="1.28887501579302E-18"
+        ixz="7.15573433840433E-18"
+        iyy="0.0499812912629564"
+        iyz="1.43884797467367E-17"
+        izz="0.0844750456481244" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/RR_wheel.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Rover_3D_YCM/meshes/RR_wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Rr_drive_act"
+    type="revolute">
+    <origin
+      xyz="0.080193 0 -0.04969"
+      rpy="1.5747 0 -1.5708" />
+    <parent
+      link="RR_steer_link" />
+    <child
+      link="RR_wheel" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+</robot>
