@@ -31,11 +31,14 @@
 #include "array_safety.h"
 
 //** Customized header for handling MuJoCo data */
+//! Custom 하면 파일 추가
+#include "Useful.hpp"
 #include "Mclquad.hpp"
 #include "MotionTrajectory.hpp"
 #include "MuJoCoInterface.hpp"
-#include "TrackingController.hpp"
+#include "MotorController.hpp"
 #include "data_logging.hpp"
+#include "estimate.hpp"
 
 
 #define MUJOCO_PLUGIN_DIR "mujoco_plugin"
@@ -65,16 +68,18 @@ const int kErrorLength = 1024;          // load error string length
 //* ******************************** MY CONSTANTS & OBJECT DECLARATION ************************* *//
 //* ******************************************************************************************** *//
 
-const double sim_end_time = 15.0;       // simulation end time (seconds)
+const double sim_end_time = 45.0;       // simulation end time (seconds)
 unsigned int loop_iter = 0;             // loop iteration counter
 RobotLeg<float> robot = buildMclQuad<float>();  // robot model
-TrackingController<float> track_ctrl(robot);     // tracking controller
+MotorController<float> motor_ctrl(robot);     // tracking controller
 MotionTrajectory<float> traj_generator;            // motion trajectory
 DataLogging<float> data_logger(robot);         // data logger
+Estimate<float> estimator(robot);              // state estimator
 
 std::shared_ptr<MuJoCoInterface<float>::MuJoCoActuatorCommand> actuator_cmd_ptr;
 std::shared_ptr<MotionTrajectory<float>::DesiredFootTrajectory> foot_traj_ptr;
 std::shared_ptr<MotionTrajectory<float>::DesiredJointTrajectory> joint_traj_ptr;
+std::shared_ptr<Estimate<float>::EstimateParam> estimate_param_ptr;
 
 
 //* ******************************************************************************************** *//
@@ -280,6 +285,81 @@ mjModel* LoadModel(const char* file, mj::Simulate& sim) {
 
 //* ******************************************************************************************** *//
 //* ******************************** Custom Function  ****************************************** *//
+void Motor_ID_Setting(mjData * d)
+{
+  /**
+   * !주의사항
+   * * 1. Trunk Mass =>100000 or 터무니 없는 숫자로 키우기
+   * * 2. Control Frequency => 1000Hz 변경
+   * * 3. 중력값 변경 => 0
+   * * 4.
+   */
+  d->ctrl[2] = 0.1*traj_generator.system_ID(d->time);
+  robot.joint_torque_des_[0][1] = d->ctrl[2];
+
+  d->qpos[0] = 0.0;
+  d->qpos[1] = 0.0;
+  d->qpos[2] = 1;
+  d->qpos[3] = 0.0;
+  d->qpos[4] = 0.0;
+  d->qpos[5] = 0.0;
+  d->qpos[6] = 0.0;
+  d->qvel[0] = 0.0;
+  d->qvel[1] = 0.0;
+  d->qvel[2] = 0.0;
+  d->qvel[3] = 0.0;
+  d->qvel[4] = 0.0;
+  d->qvel[5] = 0.0;
+  /*********************** */
+  d->qpos[7] = 0.0;
+  d->qvel[6] = 0.0;
+
+  d->qpos[8] =  0.0;
+  d->qpos[7] =  0.0;
+
+  // d->qpos[9] = 0.0;
+  // d->qvel[8] = 0.0;
+
+  d->qpos[10] = 0.0;
+  d->qvel[9] = 0.0;
+
+  d->qpos[11] = 0;
+  d->qvel[10] = 0;
+
+  d->qpos[12] = 0;
+  d->qvel[11] = 0;
+
+  d->qpos[13] = 0;
+  d->qvel[12] = 0;
+
+  d->qpos[14] = 0;
+  d->qvel[13] = 0;
+
+  d->qpos[15] = 0;
+  d->qvel[14] = 0;
+
+  d->qpos[16] = 0;
+  d->qvel[15] = 0;
+
+  d->qpos[17] = 0;
+  d->qvel[16] = 0;
+
+  d->qpos[18] = 0;
+  d->qvel[17] = 0;
+
+  d->qpos[19] = 0;
+  d->qvel[18] = 0;
+
+  d->qpos[20] = 0;
+  d->qvel[19] = 0;
+
+  d->qpos[21] = 0;
+  d->qvel[20] = 0;
+
+  d->qpos[22] = 0;
+  d->qvel[21] = 0;
+}
+
 void apply_joint_control(mjData * d)
 {
   /**
@@ -291,35 +371,27 @@ void apply_joint_control(mjData * d)
    * @param : ctrl[3*i] suspension , ctrl[1+3*i] steer, ctrl[2+3*i] drive
    */
 
-  // d->qpos[2] = 0.5;
-
-  // d->qpos[7] = 0;
-  // d->qvel[8] = 0;
-  // d->qvel[14] = 0;
-  // d->qvel[18] = 0;
-
-  d->qpos[9] = 0.0;
-  d->qpos[13] = 0.0;
-  d->qpos[17] = 0.0;
-  d->qpos[21] = 0.0;
-
-  d->qpos[8] = d->qpos[7];
-  d->qpos[12] = d->qpos[11];
-  d->qpos[16] = d->qpos[15];
-  d->qpos[20] = d->qpos[19];
+  //** 4절 링크 모션을 위한 Joint 구속에 해당하는 부분 */
+  d->qpos[8] =  -d->qpos[7]/498;
+  d->qpos[12] = -d->qpos[11]/498;
+  d->qpos[16] = -d->qpos[15]/498;
+  d->qpos[20] = -d->qpos[19]/498;
 
   //! 지금은 구동모터만 제어해주기 위함으로 setting
   for (size_t i = 0; i < 4; i++)
   {
     //* Suspension 제어
-    d->ctrl[3*i] = robot.joint_torque_des_[i][0];
+    d->ctrl[0 + 4*i] = robot.joint_torque_des_[i][0];
+
+    //* Suspension Cover 제어
+    //! 4절 링크 모션에 문제가 생기면 사용할려고 했던 부분 일단 사용 X
+    // d->ctrl[1 + 4*i] = 50*(0-d->qpos[8]) + 5*(0-d->qvel[7]);
 
     //* Steer 제어
-    // d->ctrl[1 + 3*i] = robot.joint_torque_des_[i][1];
-    d->ctrl[1 + 3*i] = 0;
+    d->ctrl[2 + 4*i] = robot.joint_torque_des_[i][1];
 
     //* Drive 제어
-    d->ctrl[2 + 3*i] = robot.joint_torque_des_[i][2]; // Torque 양수값 넣어서 도는 방향 확인
+    d->ctrl[3 + 4*i] = robot.joint_torque_des_[i][2]; // Torque 양수값 넣어서 도는 방향 확인
   }
 
 }
@@ -329,13 +401,34 @@ void YCM_controller()
   //! Custom Controller
   // bool bIsPerturbOn = false;
 
-  //Traj 생성
-  traj_generator.driving_test();
-  //Controller
-  track_ctrl.suspension_motor_control();
-  track_ctrl.drive_motor_control();
+  //* trajectory generation
+  traj_generator.driving_test(d->time);
+  // traj_generator.suspension_test(d->time);
 
+  //* Controller
+  motor_ctrl.suspension_motor_control();
+  motor_ctrl.drive_motor_control();
+  motor_ctrl.steer_motor_control();
+
+  // Motor_ID_Setting(d); // 사용할 때 이 함수 안에 꼭 읽어보기
   apply_joint_control(d);
+}
+
+void Mu_Lambda_setting()
+{
+  //** Mu_Lambda Curve Setting */
+  estimator.cal_mu();
+  if (d->time > 2)
+  {
+    for (size_t i = 0; i < 4; i++)
+    {
+      m->geom_friction[36+7*3*i] = estimate_param_ptr->mu_[i];
+      // m->geom_friction[36+7*3*i] = 0.9;
+
+    }
+
+  }
+
 }
 
 //* ******************************************************************************************** *//
@@ -472,6 +565,7 @@ void PhysicsLoop(mj::Simulate& sim) {
             //* ***** GENERATE DESIRED JOINT COMMAND AND APPLY CONTROL INPUT FOR SIMULATION***** *//
             //! Custom Controller
             YCM_controller();
+            Mu_Lambda_setting();
 
             // run single step, let next iteration deal with timing
             mj_step(m, d);
@@ -482,7 +576,7 @@ void PhysicsLoop(mj::Simulate& sim) {
 
             if (loop_iter % data_logger.get_logging_freq() == 0)
             {
-              data_logger.save_data_FL(m, d);
+              data_logger.save_data(m, d);
             }
             loop_iter++;
 
@@ -510,6 +604,8 @@ void PhysicsLoop(mj::Simulate& sim) {
             //* ***** GENERATE DESIRED JOINT COMMAND AND APPLY CONTROL INPUT FOR SIMULATION***** *//
             //! Custom Controller
             YCM_controller();
+            Mu_Lambda_setting();
+
             // run single step, let next iteration deal with timing
             mj_step(m, d);
             stepped = true;
@@ -520,7 +616,7 @@ void PhysicsLoop(mj::Simulate& sim) {
 
             if (loop_iter % data_logger.get_logging_freq() == 0)
             {
-              data_logger.save_data_FL(m, d);
+              data_logger.save_data(m, d);
             }
             loop_iter++;
 
@@ -642,16 +738,21 @@ int main(int argc, char** argv) {
   //* ****************************************************************************************** *//
   //* ********** CREATE MUJOCO INTERFACE OBJECT AND SENSOR & ACTUATOR POINTER ****************** *//
   //* ****************************************************************************************** *//
+  //! ptr 만들면 무조건 여기에 set 함수 만들어줘야함
   auto mujoco_interface = std::make_shared<MuJoCoInterface<float>>(sim.get(), robot);
-  foot_traj_ptr = traj_generator.get_foot_traj_ptr();
-  joint_traj_ptr = traj_generator.get_joint_traj_ptr();
+  foot_traj_ptr = traj_generator.set_foot_traj_ptr();
+  joint_traj_ptr = traj_generator.set_joint_traj_ptr();
+  estimate_param_ptr = estimator.set_estimate_param_ptr();
+
 
   //* ****************************************************************************************** *//
   //* *************** GET POINTER s.t. EACH OBJECT CAN SHARE THE SAME DATA ********************* *//
   //* ****************************************************************************************** *//
   //* **************** Changmin StanceForceControl Test Version ******************************** *//
+  //! 다른 folder로 넘겨줄거면 여기서 get 함수 만들어 줘야함
 
-  track_ctrl.get_traj_pointer(foot_traj_ptr, joint_traj_ptr);
+  motor_ctrl.get_traj_pointer(foot_traj_ptr, joint_traj_ptr);
+  data_logger.get_traj_ptr(foot_traj_ptr, joint_traj_ptr);
 
   // start physics thread
   std::thread physicsthreadhandle(&PhysicsThread, sim.get(), filename);

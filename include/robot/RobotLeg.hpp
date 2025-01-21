@@ -43,7 +43,7 @@ public:
 
   //! Be careful Vec3, Vec2 -> Because of HAA
   Vec2<T> kp_[4], kd_[4];
-  Vec3<T> joint_pos_des_[4], joint_vel_des_[4], joint_torque_des_[4];
+  Vec3<T> joint_pos_des_[4], joint_vel_des_[4], joint_torque_des_[4]; // [i][0]: Sus_des, [i][1]: Steer_des, [i][2]: Drive_des
 
   //* variables for sensor data *//
   Vec3<T> body_pos_world_, body_vel_world_;
@@ -51,9 +51,9 @@ public:
   Vec4<T> body_ang_quat_world_;
 
 
-  Vec4<T> joint_pos_act_[4], joint_vel_act_[4];
+  Vec4<T> joint_pos_act_[4], joint_vel_act_[4]; // [i][0]: Sus_act, [i][1]: sus_cover(no use), [i][2]: Steer_act, [i][3]: Drive_act (기어비 고려되어 있다. Driving은 휠단에서 모터로 reference 바뀔 때 고려)
 
-  T foot_contact_[4];
+  T foot_contact_[4]; // [0]: FL, [1]: FR, [2]: RL, [3]: RR
   Vec3<T> foot_grf_world_[4];
 
 

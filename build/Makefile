@@ -123,32 +123,59 @@ simulation/fast:
 	$(MAKE) -f CMakeFiles/simulation.dir/build.make CMakeFiles/simulation.dir/build
 .PHONY : simulation/fast
 
-src/controller/TrackingController.o: src/controller/TrackingController.cpp.o
+src/controller/MotorController.o: src/controller/MotorController.cpp.o
 
-.PHONY : src/controller/TrackingController.o
+.PHONY : src/controller/MotorController.o
 
 # target to build an object file
-src/controller/TrackingController.cpp.o:
-	$(MAKE) -f CMakeFiles/simulation.dir/build.make CMakeFiles/simulation.dir/src/controller/TrackingController.cpp.o
-.PHONY : src/controller/TrackingController.cpp.o
+src/controller/MotorController.cpp.o:
+	$(MAKE) -f CMakeFiles/simulation.dir/build.make CMakeFiles/simulation.dir/src/controller/MotorController.cpp.o
+.PHONY : src/controller/MotorController.cpp.o
 
-src/controller/TrackingController.i: src/controller/TrackingController.cpp.i
+src/controller/MotorController.i: src/controller/MotorController.cpp.i
 
-.PHONY : src/controller/TrackingController.i
+.PHONY : src/controller/MotorController.i
 
 # target to preprocess a source file
-src/controller/TrackingController.cpp.i:
-	$(MAKE) -f CMakeFiles/simulation.dir/build.make CMakeFiles/simulation.dir/src/controller/TrackingController.cpp.i
-.PHONY : src/controller/TrackingController.cpp.i
+src/controller/MotorController.cpp.i:
+	$(MAKE) -f CMakeFiles/simulation.dir/build.make CMakeFiles/simulation.dir/src/controller/MotorController.cpp.i
+.PHONY : src/controller/MotorController.cpp.i
 
-src/controller/TrackingController.s: src/controller/TrackingController.cpp.s
+src/controller/MotorController.s: src/controller/MotorController.cpp.s
 
-.PHONY : src/controller/TrackingController.s
+.PHONY : src/controller/MotorController.s
 
 # target to generate assembly for a file
-src/controller/TrackingController.cpp.s:
-	$(MAKE) -f CMakeFiles/simulation.dir/build.make CMakeFiles/simulation.dir/src/controller/TrackingController.cpp.s
-.PHONY : src/controller/TrackingController.cpp.s
+src/controller/MotorController.cpp.s:
+	$(MAKE) -f CMakeFiles/simulation.dir/build.make CMakeFiles/simulation.dir/src/controller/MotorController.cpp.s
+.PHONY : src/controller/MotorController.cpp.s
+
+src/controller/estimate.o: src/controller/estimate.cpp.o
+
+.PHONY : src/controller/estimate.o
+
+# target to build an object file
+src/controller/estimate.cpp.o:
+	$(MAKE) -f CMakeFiles/simulation.dir/build.make CMakeFiles/simulation.dir/src/controller/estimate.cpp.o
+.PHONY : src/controller/estimate.cpp.o
+
+src/controller/estimate.i: src/controller/estimate.cpp.i
+
+.PHONY : src/controller/estimate.i
+
+# target to preprocess a source file
+src/controller/estimate.cpp.i:
+	$(MAKE) -f CMakeFiles/simulation.dir/build.make CMakeFiles/simulation.dir/src/controller/estimate.cpp.i
+.PHONY : src/controller/estimate.cpp.i
+
+src/controller/estimate.s: src/controller/estimate.cpp.s
+
+.PHONY : src/controller/estimate.s
+
+# target to generate assembly for a file
+src/controller/estimate.cpp.s:
+	$(MAKE) -f CMakeFiles/simulation.dir/build.make CMakeFiles/simulation.dir/src/controller/estimate.cpp.s
+.PHONY : src/controller/estimate.cpp.s
 
 src/glfw_adapter.o: src/glfw_adapter.cc.o
 
@@ -257,6 +284,33 @@ src/main.s: src/main.cc.s
 src/main.cc.s:
 	$(MAKE) -f CMakeFiles/simulation.dir/build.make CMakeFiles/simulation.dir/src/main.cc.s
 .PHONY : src/main.cc.s
+
+src/math/Useful.o: src/math/Useful.cpp.o
+
+.PHONY : src/math/Useful.o
+
+# target to build an object file
+src/math/Useful.cpp.o:
+	$(MAKE) -f CMakeFiles/simulation.dir/build.make CMakeFiles/simulation.dir/src/math/Useful.cpp.o
+.PHONY : src/math/Useful.cpp.o
+
+src/math/Useful.i: src/math/Useful.cpp.i
+
+.PHONY : src/math/Useful.i
+
+# target to preprocess a source file
+src/math/Useful.cpp.i:
+	$(MAKE) -f CMakeFiles/simulation.dir/build.make CMakeFiles/simulation.dir/src/math/Useful.cpp.i
+.PHONY : src/math/Useful.cpp.i
+
+src/math/Useful.s: src/math/Useful.cpp.s
+
+.PHONY : src/math/Useful.s
+
+# target to generate assembly for a file
+src/math/Useful.cpp.s:
+	$(MAKE) -f CMakeFiles/simulation.dir/build.make CMakeFiles/simulation.dir/src/math/Useful.cpp.s
+.PHONY : src/math/Useful.cpp.s
 
 src/platform_ui_adapter.o: src/platform_ui_adapter.cc.o
 
@@ -429,9 +483,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... simulation"
-	@echo "... src/controller/TrackingController.o"
-	@echo "... src/controller/TrackingController.i"
-	@echo "... src/controller/TrackingController.s"
+	@echo "... src/controller/MotorController.o"
+	@echo "... src/controller/MotorController.i"
+	@echo "... src/controller/MotorController.s"
+	@echo "... src/controller/estimate.o"
+	@echo "... src/controller/estimate.i"
+	@echo "... src/controller/estimate.s"
 	@echo "... src/glfw_adapter.o"
 	@echo "... src/glfw_adapter.i"
 	@echo "... src/glfw_adapter.s"
@@ -444,6 +501,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/math/Useful.o"
+	@echo "... src/math/Useful.i"
+	@echo "... src/math/Useful.s"
 	@echo "... src/platform_ui_adapter.o"
 	@echo "... src/platform_ui_adapter.i"
 	@echo "... src/platform_ui_adapter.s"

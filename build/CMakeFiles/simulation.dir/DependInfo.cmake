@@ -4,11 +4,13 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/ycm/mujoco/space_rover/src/controller/TrackingController.cpp" "/home/ycm/mujoco/space_rover/build/CMakeFiles/simulation.dir/src/controller/TrackingController.cpp.o"
+  "/home/ycm/mujoco/space_rover/src/controller/MotorController.cpp" "/home/ycm/mujoco/space_rover/build/CMakeFiles/simulation.dir/src/controller/MotorController.cpp.o"
+  "/home/ycm/mujoco/space_rover/src/controller/estimate.cpp" "/home/ycm/mujoco/space_rover/build/CMakeFiles/simulation.dir/src/controller/estimate.cpp.o"
   "/home/ycm/mujoco/space_rover/src/glfw_adapter.cc" "/home/ycm/mujoco/space_rover/build/CMakeFiles/simulation.dir/src/glfw_adapter.cc.o"
   "/home/ycm/mujoco/space_rover/src/glfw_dispatch.cc" "/home/ycm/mujoco/space_rover/build/CMakeFiles/simulation.dir/src/glfw_dispatch.cc.o"
   "/home/ycm/mujoco/space_rover/src/lodepng.cpp" "/home/ycm/mujoco/space_rover/build/CMakeFiles/simulation.dir/src/lodepng.cpp.o"
   "/home/ycm/mujoco/space_rover/src/main.cc" "/home/ycm/mujoco/space_rover/build/CMakeFiles/simulation.dir/src/main.cc.o"
+  "/home/ycm/mujoco/space_rover/src/math/Useful.cpp" "/home/ycm/mujoco/space_rover/build/CMakeFiles/simulation.dir/src/math/Useful.cpp.o"
   "/home/ycm/mujoco/space_rover/src/platform_ui_adapter.cc" "/home/ycm/mujoco/space_rover/build/CMakeFiles/simulation.dir/src/platform_ui_adapter.cc.o"
   "/home/ycm/mujoco/space_rover/src/robot/MuJoCoInterface.cpp" "/home/ycm/mujoco/space_rover/build/CMakeFiles/simulation.dir/src/robot/MuJoCoInterface.cpp.o"
   "/home/ycm/mujoco/space_rover/src/robot/RobotLeg.cpp" "/home/ycm/mujoco/space_rover/build/CMakeFiles/simulation.dir/src/robot/RobotLeg.cpp.o"

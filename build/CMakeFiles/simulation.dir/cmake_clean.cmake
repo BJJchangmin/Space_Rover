@@ -1,9 +1,11 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/simulation.dir/src/controller/TrackingController.cpp.o"
+  "CMakeFiles/simulation.dir/src/controller/MotorController.cpp.o"
+  "CMakeFiles/simulation.dir/src/controller/estimate.cpp.o"
   "CMakeFiles/simulation.dir/src/glfw_adapter.cc.o"
   "CMakeFiles/simulation.dir/src/glfw_dispatch.cc.o"
   "CMakeFiles/simulation.dir/src/lodepng.cpp.o"
   "CMakeFiles/simulation.dir/src/main.cc.o"
+  "CMakeFiles/simulation.dir/src/math/Useful.cpp.o"
   "CMakeFiles/simulation.dir/src/platform_ui_adapter.cc.o"
   "CMakeFiles/simulation.dir/src/robot/MuJoCoInterface.cpp.o"
   "CMakeFiles/simulation.dir/src/robot/RobotLeg.cpp.o"

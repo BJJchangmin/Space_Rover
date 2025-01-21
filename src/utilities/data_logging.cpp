@@ -7,26 +7,29 @@ using namespace std;
  */
 template <typename T>
 DataLogging<T>::DataLogging(RobotLeg<T> & robot)
-  : fout_FL_("../data/data_FL.csv"),
-    fout_FR_("../data/data_FR.csv"),
-    fout_RL_("../data/data_RL.csv"),
-    fout_RR_("../data/data_RR.csv"),
-    fout_trunk_("../data/data_trunk.csv"),
-    robot_(robot)
+  : robot_(robot)
 {
   cout << "Data Logger object is created" << endl;
+  fout_[0].open("../data/data_FL.csv");
+  fout_[1].open("../data/data_FR.csv");
+  fout_[2].open("../data/data_RL.csv");
+  fout_[3].open("../data/data_RR.csv");
+  fout_[4].open("../data/data_trunk.csv");
 
 
 
   foot_traj_ptr_ = nullptr;
 
-  if (!fout_FL_)
+  for (int i = 0; i < 5; i++)
   {
-    std::cerr << "Cannot open file" << std::endl;
-    exit(1);
+    if (!fout_[i])
+    {
+      std::cerr << "Cannot open file" << endl;
+      exit(1);
+    }
   }
 
-  init_data_FL();
+  init_data();
 
 }
 
@@ -37,56 +40,111 @@ DataLogging<T>::DataLogging(RobotLeg<T> & robot)
  * ! comma (,) should be omitted in the last line and newline must exist after the last data.
  */
 template <typename T>
-void DataLogging<T>::save_data_FL(const mjModel* m, mjData* d)
+void DataLogging<T>::save_data(const mjModel* m, mjData* d)
 {
-  if (!fout_FL_)
+
+  //*********************  Leg Data  *************************** */
+  for (int i = 0; i < 4; i++)
+  {
+    if (!fout_[i])
+    {
+      std::cerr << "Cannot open file" << std::endl;
+      exit(1);
+    }
+    else
+    {
+
+      fout_[i] << d->time << ","; // time
+
+      fout_[i] << joint_traj_ptr_->joint_pos_des_[i][0] << ","; // suspension Joint position reference
+      fout_[i] << robot_.joint_pos_act_[i][0] << ","; // suspension Joint position
+      fout_[i] << robot_.joint_vel_act_[i][0] << ","; // suspension velocity
+      fout_[i] << robot_.joint_torque_des_[i][0] << ","; // suspension torque
+
+      fout_[i] << joint_traj_ptr_->joint_pos_des_[i][1] << ","; // steer Joint position reference
+      fout_[i] << robot_.joint_pos_act_[i][2] << ","; // steer Joint position
+      fout_[i] << robot_.joint_vel_act_[i][2]<< ","; // steer velocity
+      fout_[i] << robot_.joint_torque_des_[i][1] << ","; // steer torque
+
+      fout_[i] << joint_traj_ptr_->joint_vel_des_[i][2] << ","; // drive Joint velocity reference
+      fout_[i] << robot_.joint_pos_act_[i][3] << ","; // drive Joint position
+      fout_[i] << robot_.joint_vel_act_[i][3] << ","; // drive Joint velocity
+      fout_[i] << robot_.joint_torque_des_[i][2]; // drive torque
+
+
+
+
+      // ! Don't remove the newline
+      fout_[i] << endl;
+    }
+  }
+
+  if (!fout_[4])
   {
     std::cerr << "Cannot open file" << std::endl;
     exit(1);
   }
   else
   {
-    // // Debugging: Print to console what we're writing
-    // std::cout << "Writing data to file: " << std::endl;
-    // std::cout << d->time << ", " << robot_.foot_pos_rw_act_local_[0] << ", "
-    //           << robot_.foot_pos_rw_act_local_[1] << ", " << robot_.foot_pos_rw_act_local_[2] << ", "
-    //           << robot_.foot_vel_rw_act_local_[0] << std::endl;
-
-    fout_FL_ << d->time ; // time
-
-
-
+    fout_[4] << d->sensordata[6] << ","; // trunk x velocity
+    fout_[4] << d->sensordata[7] << ","; // trunk y velocity
+    fout_[4] << d->sensordata[8] << ","; // trunk z velocity
+    fout_[4] << d->sensordata[9] << ","; // trunk x_ang_vel
+    fout_[4] << d->sensordata[10] << ","; // trunk y_ang_vel
+    fout_[4] << d->sensordata[11] << ","; // trunk z_ang_vel
+    fout_[4] << d->sensordata[12] << ","; // trunk_x_pos
+    fout_[4] << d->sensordata[13] << ","; // trunk_y_pos
+    fout_[4] << d->sensordata[14] ; // trunk_z_pos
 
     // ! Don't remove the newline
-    fout_FL_ << endl;
+    fout_[4] << endl;
+  }
 
-    }
+
 
 }
 
-/**
- * @brief Set names of data to be saved
- * After you select which data to save, you can set the headers here.
- * You have to set the headers in the same order as the data and it is recommended that
- * the headers should be named as brief but you can recognize the data.
- * * Data are separated by a comma (,) followed by a space
- */
+
 template <typename T>
-void DataLogging<T>::init_data_FL()
+void DataLogging<T>::init_data()
 {
-  if (!fout_FL_)
+
+  //************************ Leg Data *************************** */
+  for (int i = 0; i < 4; i++)
   {
-    std::cerr << "Cannot open file" << std::endl;
+    if (!fout_[i])
+    {
+      std::cerr << "Cannot open file: " << i <<std::endl;
+      exit(1);
+    }
+    else
+    {
+      fout_[i] << "Time, " ;
+      fout_[i] << "sus_pos_ref, sus_pos, sus_vel, sus_torque, ";
+      fout_[i] << "steer_pos_ref, steer_pos, steer_vel, steer_torque, ";
+      fout_[i] << "drive_vel_ref, drive_pos, drive_vel, drive_torque " << std::endl;
+    }
+  }
+
+  //************************************Trunk Data ********************************************** */
+  if (!fout_[4])
+  {
+    std::cerr << "Cannot open file: " << 4 <<std::endl;
     exit(1);
   }
   else
   {
-    fout_FL_ << "time" << std::endl;
+    fout_[4] << "trunk_x_vel, trunk_y_vel, trunk_z_vel, ";
+    fout_[4] << "trunk_x_ang_vel, trunk_y_ang_vel, trunk_z_ang_vel";
+    fout_[4] << "trunk_x_pos, trunk_y_pos, trunk_z_pos" << std::endl;
+
   }
+
+
 }
 
 template <typename T>
-void DataLogging<T>::set_traj_ptr(
+void DataLogging<T>::get_traj_ptr(
     std::shared_ptr<typename MotionTrajectory<T>::DesiredFootTrajectory> foot_traj_ptr,
     std::shared_ptr<typename MotionTrajectory<T>::DesiredJointTrajectory> joint_traj_ptr)
 {

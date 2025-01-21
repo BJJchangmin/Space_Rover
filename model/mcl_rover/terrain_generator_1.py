@@ -283,7 +283,7 @@ if __name__ == "__main__":
     #                   nums=[10, 8])
 
     # Perlin heigh field
-    tg.AddPerlinHeighField(position=[0.04735, -1.09, 0], size=[30, 30], height_scale=0.4)
+    tg.AddPerlinHeighField(position=[0.04735, -1.09, -0.1], size=[50, 50], height_scale=0.01)
 
 
     tg.Save()

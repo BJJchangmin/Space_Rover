@@ -2674,22 +2674,29 @@ void Simulate::RenderLoop() {
       // printf("Current Camera View: %f, %f, %f, %f, %f, %f \n", this->cam.azimuth,
       //        this->cam.distance, this->cam.elevation, this->cam.lookat[0], this->cam.lookat[1],
       //        this->cam.lookat[2]);
-      this->cam.type = mjCAMERA_TRACKING;
-      this->cam.fixedcamid = -1;
-      this->cam.trackbodyid = 0;
-      // this->cam.type = mjCAMERA_FREE;
-      this->cam.azimuth = -90.0;
-      this->cam.elevation = 0;
-      this->cam.distance = 3.0;
+      // this->cam.type = mjCAMERA_TRACKING;
+      // this->cam.fixedcamid = -1;
+      // this->cam.trackbodyid = 0;
+      this->cam.type = mjCAMERA_FREE;
+      // this->cam.azimuth = -36.25;
+      // this->cam.elevation = -39;
+      // this->cam.distance = 3.4;
       // this->cam.lookat[0] = d_->qvel[0];
       // this->cam.lookat[0] += 0.001;
       // this->cam.lookat[1] = 0.0;
       // this->cam.lookat[2] = 0.15;
 
+      //* Visual Options *//
+      this->scn.flags[mjRND_REFLECTION] = false;
+      this->scn.flags[mjRND_HAZE] = false;
+
       //* Perturbation *//
       this->opt.flags[mjVIS_PERTFORCE] = true;
       this->opt.flags[mjVIS_CONTACTFORCE] = false;
       this->opt.flags[mjVIS_CONTACTPOINT] = true;
+
+
+
 
       //* ************************************************************************************** *//
 

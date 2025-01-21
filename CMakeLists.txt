@@ -43,6 +43,7 @@ file(GLOB_RECURSE SOURCES
   ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/robot/*.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/math/*.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/trajectory/*.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/controller/*cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/utilities/*.cpp

@@ -25,13 +25,19 @@ void RobotLeg<T>::get_sensor_data(mjData * data)
     {
       foot_grf_world_[i][j] = data->sensordata[19 + 4*i + j];
     }
+    //******************** 기어비 반영 부분 **********************/
+    joint_pos_act_[i][0] = data->qpos[7 + 4*i]/498;
+    joint_vel_act_[i][0] = data->qvel[6 + 4*i]/498;
 
-    for (size_t j = 0; j < 4; j++)
-    {
-      // [4][4] = [FL FR RL RR][sus, sus_cover, steer, drive] -> 순서
-      joint_pos_act_[i][j] = data->qpos[7 + 4*i + j];
-      joint_vel_act_[i][j] = data->qvel[6 + 4*i + j];
-    }
+    joint_pos_act_[i][1] = data->qpos[8 + 4*i]/498;
+    joint_vel_act_[i][1] = data->qvel[7 + 4*i]/498;
+
+    joint_pos_act_[i][2] = data->qpos[9 + 4*i]/200;
+    joint_vel_act_[i][2] = data->qvel[8 + 4*i]/200;
+
+    joint_pos_act_[i][3] = data->qpos[10 + 4*i]; // 기어비 반영은 Motor Reference에서 해줄 예정
+    joint_vel_act_[i][3] = data->qvel[9 + 4*i];
+
 
   }
 }

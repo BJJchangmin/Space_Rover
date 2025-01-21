@@ -12,19 +12,18 @@ template <typename T>
 class MotionTrajectory
 {
   private:
-    T t_;
-    T T_pause_;   // pause duration
-    T T_crouch_;  // crouch duration
-    // T f_crouch_;  // crouch frequency = 1 / T_crouch_
-    T T_land_;     // landing duration
-    T T_recover_;  // recover duration
 
-    T h_max_, h_min_, h_home_;  // max/min and home height of body
+    T Driving_Gear_Ratio;
 
-    // parameter for Test StanceForceControl
-    T dthr_init_;
-
-    T state_;
+    //* ID Parameters *//
+    int NUM_SEGMENTS;
+    int SEGMENT_DURATION;
+    T freqs[20];
+    T amps[20];
+    T phases[20];
+    T start_time;
+    float shreder_ID_data_[30000];
+    int signal_idx;
 
   public:
     struct DesiredFootTrajectory
@@ -38,6 +37,7 @@ class MotionTrajectory
     {
         /**
          * @param joint_des_: [FL FR RL RR][Sus, Steer, Drive] -> [4][3] 이 순서다
+         * ! Driving Reference는 휠단에서 모터 input으로 바꿔줘야함
          */
         Vec3<T> joint_pos_des_[4];
         Vec3<T> joint_vel_des_[4];
@@ -45,16 +45,23 @@ class MotionTrajectory
     };
 
     std::shared_ptr<DesiredFootTrajectory> foot_traj_ptr_;
-    std::shared_ptr<DesiredFootTrajectory> get_foot_traj_ptr();
+    std::shared_ptr<DesiredFootTrajectory> set_foot_traj_ptr();
 
     std::shared_ptr<DesiredJointTrajectory> joint_traj_ptr_;
-    std::shared_ptr<DesiredJointTrajectory> get_joint_traj_ptr();
+    std::shared_ptr<DesiredJointTrajectory> set_joint_traj_ptr();
 
   public:
 
     MotionTrajectory();
     void squat(T time);
-    void driving_test();
+    void driving_test(T time);
+    void suspension_test(T time);
+
+    void RandomFreqs();
+    void loadDataFromFile(const char* filename);
+    T motor_ID(T time);
+    T system_ID(T time);
+
 
 
 };

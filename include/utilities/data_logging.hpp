@@ -22,19 +22,7 @@ class DataLogging
 {
 
   private:
-    enum LegID
-    {
-      FL = 0,
-      FR = 1,
-      RL = 2,
-      RR = 3
-    };
-
-    std::ofstream fout_FL_;
-    std::ofstream fout_FR_;
-    std::ofstream fout_RL_;
-    std::ofstream fout_RR_;
-    std::ofstream fout_trunk_;
+    std::ofstream fout_[5];
     static constexpr int k_save_sampling = 1;  // sampling rate at which data is saved
     RobotLeg<T> & robot_;
 
@@ -44,25 +32,14 @@ class DataLogging
   public:
     explicit DataLogging(RobotLeg<T> & robot);
 
-    void init_data_FL();
-    void init_data_FR();
-    void init_data_RL();
-    void init_data_RR();
-    void init_data_trunk();
+    void init_data();
+    void save_data(const mjModel * m, mjData * d);
 
-    void save_data_FL(const mjModel * m, mjData * d);
-    void save_data_FR(const mjModel * m, mjData * d);
-    void save_data_RL(const mjModel * m, mjData * d);
-    void save_data_RR(const mjModel * m, mjData * d);
-    void save_data_trunk(const mjModel * m, mjData * d);
-
-   void set_traj_ptr(
+   void get_traj_ptr(
     std::shared_ptr<typename MotionTrajectory<T>::DesiredFootTrajectory> foot_traj_ptr,
     std::shared_ptr<typename MotionTrajectory<T>::DesiredJointTrajectory> joint_traj_ptr);
 
     int get_logging_freq();
-
-
 
 };
 
