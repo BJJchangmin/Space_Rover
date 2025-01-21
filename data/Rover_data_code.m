@@ -34,6 +34,9 @@ for i = 1:1:4
     drive_vel{i} = Arr_Leg{i}(:,12);
     drive_torque{i} = Arr_Leg{i}(:,13);
 
+    slip_ratio{i} = Arr_Leg{i}(:,14);
+    Mu{i} = Arr_Leg{i}(:,15);
+
 
 end
 
@@ -173,12 +176,28 @@ ylim([0 10]);
 grid on;
 ylabel('y (m)','FontName','Times New Roman','FontSize', Faxis,'Interpreter', 'latex'); % y축 레이블
 xlabel('x (m)','FontName','Times New Roman','FontSize', Faxis,'Interpreter', 'latex'); % x축 레이블
-title('Trunk Map','FontName','Times New Roman','FontSize',sgT,'Interpreter', 'latex')
+title('Trunk Map','FontName','Times New Roman','FontSize',sgT,'Interpreter', 'latex');
 
 figure(8)
 plot(t,Trunk_x_vel,'r-','LineWidth', lw);
 grid on;
 ylabel('m/s','FontName','Times New Roman','FontSize', Faxis,'Interpreter', 'latex'); % y축 레이블
+xlabel('Time (s)','FontName','Times New Roman','FontSize', Faxis,'Interpreter', 'latex'); % x축 레이블
+title('Trunk_x_vel','FontName','Times New Roman','FontSize',sgT,'Interpreter', 'latex')
+
+figure(9)
+for i = 1:1:4
+    subplot(2,2,i);
+    plot(t,slip_ratio{i},'k-','LineWidth', lw);
+    grid on;
+    xlim([3 40]);
+    ylim([0 1]);
+    legend('ref','act','FontName','Times New Roman','location','northeast','FontSize',fl,'Interpreter', 'latex')
+    ylabel('%(percent)','FontName','Times New Roman','FontSize', Faxis,'Interpreter', 'latex'); % y축 레이블
+    xlabel('Time (s)','FontName','Times New Roman','FontSize', Faxis,'Interpreter', 'latex'); % x축 레이블
+
+end
+sgtitle('Slip Ratio','FontName','Times New Roman','FontSize',sgT,'Interpreter', 'latex');
 
 
 

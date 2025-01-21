@@ -15,6 +15,7 @@
 
 #include "MotionTrajectory.hpp"
 #include "Mclquad.hpp"
+#include "estimate.hpp"
 
 
 template <typename T>
@@ -28,6 +29,8 @@ class DataLogging
 
     std::shared_ptr<typename MotionTrajectory<T>::DesiredFootTrajectory> foot_traj_ptr_;
     std::shared_ptr<typename MotionTrajectory<T>::DesiredJointTrajectory> joint_traj_ptr_;
+    std::shared_ptr<typename Estimate<T>::EstimateParam> estimate_param_ptr_;
+
 
   public:
     explicit DataLogging(RobotLeg<T> & robot);
@@ -35,9 +38,11 @@ class DataLogging
     void init_data();
     void save_data(const mjModel * m, mjData * d);
 
-   void get_traj_ptr(
+    void get_traj_ptr(
     std::shared_ptr<typename MotionTrajectory<T>::DesiredFootTrajectory> foot_traj_ptr,
     std::shared_ptr<typename MotionTrajectory<T>::DesiredJointTrajectory> joint_traj_ptr);
+
+    void get_estimate_ptr( std::shared_ptr<typename Estimate<T>::EstimateParam> estimate_param_ptr);
 
     int get_logging_freq();
 

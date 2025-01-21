@@ -753,6 +753,7 @@ int main(int argc, char** argv) {
 
   motor_ctrl.get_traj_pointer(foot_traj_ptr, joint_traj_ptr);
   data_logger.get_traj_ptr(foot_traj_ptr, joint_traj_ptr);
+  data_logger.get_estimate_ptr(estimate_param_ptr);
 
   // start physics thread
   std::thread physicsthreadhandle(&PhysicsThread, sim.get(), filename);

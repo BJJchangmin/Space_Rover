@@ -69,8 +69,10 @@ void DataLogging<T>::save_data(const mjModel* m, mjData* d)
       fout_[i] << joint_traj_ptr_->joint_vel_des_[i][2] << ","; // drive Joint velocity reference
       fout_[i] << robot_.joint_pos_act_[i][3] << ","; // drive Joint position
       fout_[i] << robot_.joint_vel_act_[i][3] << ","; // drive Joint velocity
-      fout_[i] << robot_.joint_torque_des_[i][2]; // drive torque
+      fout_[i] << robot_.joint_torque_des_[i][2] <<","; // drive torque
 
+      fout_[i] << estimate_param_ptr_->slip_ratio_[i] << ","; // slip ratio
+      fout_[i] << estimate_param_ptr_->mu_[i]; // friction coefficient
 
 
 
@@ -122,7 +124,8 @@ void DataLogging<T>::init_data()
       fout_[i] << "Time, " ;
       fout_[i] << "sus_pos_ref, sus_pos, sus_vel, sus_torque, ";
       fout_[i] << "steer_pos_ref, steer_pos, steer_vel, steer_torque, ";
-      fout_[i] << "drive_vel_ref, drive_pos, drive_vel, drive_torque " << std::endl;
+      fout_[i] << "drive_vel_ref, drive_pos, drive_vel, drive_torque ";
+      fout_[i] << "slip_ratio, Mu " << std::endl;
     }
   }
 
@@ -150,6 +153,13 @@ void DataLogging<T>::get_traj_ptr(
 {
   foot_traj_ptr_ = foot_traj_ptr;
   joint_traj_ptr_ = joint_traj_ptr;
+}
+
+template <typename T>
+void DataLogging<T>::get_estimate_ptr(
+    std::shared_ptr<typename Estimate<T>::EstimateParam> estimate_param_ptr)
+{
+  estimate_param_ptr_ = estimate_param_ptr;
 }
 
 
